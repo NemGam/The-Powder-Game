@@ -22,13 +22,11 @@
     <ClInclude Include="include\application.h" />
     <ClInclude Include="include\event_manager.h" />
     <ClInclude Include="include\window.h" />
-    <ClInclude Include="include\window_manager.h" />
     <ClInclude Include="include\manager_base.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\manager_base.cpp" />
-    <ClCompile Include="src\window_manager.cpp" />
     <ClCompile Include="src\event_manager.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />

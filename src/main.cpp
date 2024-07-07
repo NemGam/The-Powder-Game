@@ -3,35 +3,35 @@
 
 #include "application.h"
 #include "event_manager.h"
-#include "window_manager.h"
+#include "window.h"
 
-
+constexpr int kWindowHeight = 640;
+constexpr int kWindowWidth = 820;
 
 EventManager event_manager;
-WindowManager window_manager;
 
 int main() {
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     Application::Start();
-
+    
     //Start everything up
     glfwInit();
     event_manager.StartUp();
-    window_manager.StartUp();
 
-
+    auto window = std::unique_ptr<Window>(Window::Create(kWindowWidth, kWindowHeight, "The Powder Game"));
     
     //Actual loop
-    window_manager.GetCurrentWindow().SetName("The Powder Game");
 
-    while(Application::IsRunning()) {
-        window_manager.Update();
+    while(Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
+        window->Render();
         event_manager.Update();
     }
 
 
     //Shut everything down
-    window_manager.ShutDown();
     event_manager.ShutDown();
 	return 0;
 }

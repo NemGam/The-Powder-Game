@@ -1,28 +1,37 @@
 #ifndef WINDOW_H
 #define WINDOW_H
+#include <memory>
 #include <string>
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
-#include "window_manager.h"
+
+struct DestroyGLFWWin {
+
+		void operator()(GLFWwindow* ptr) {
+			glfwDestroyWindow(ptr);
+		}
+
+	};
 
 class Window {
 public:
 
 private:
-	WindowManager* window_manager_;
-	GLFWwindow* glfw_window_;
+	std::unique_ptr<GLFWwindow, DestroyGLFWWin> glfw_window_;
 	int width_;
 	int height_;
 
-public: 
-	static Window* Create(WindowManager& window_manager, int width, int height, const std::string& name);
-	static Window* Create(WindowManager& window_manager, int width, int height);
 
-	void Render();
-	void SetName(const std::string& new_name) const;
+public: 
+	static Window* Create(int width, int height, const std::string& name);
+	static Window* Create(int width, int height);
+
+	GLFWwindow& GetNativeWindow();
+	void Render() const;
+	void SetTitle(const std::string& new_name);
 	~Window();
 private:
-	Window(WindowManager& window_manager, int width, int height, std::string name);
+	Window(int width, int height, std::string name);
 
 	static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 

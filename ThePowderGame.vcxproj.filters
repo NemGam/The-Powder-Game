@@ -11,7 +11,6 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="include\event_manager.h" />
-    <ClInclude Include="include\window_manager.h" />
     <ClInclude Include="include\manager_base.h" />
     <ClInclude Include="include\application.h" />
   </ItemGroup>
@@ -20,7 +19,6 @@
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\window.cpp" />
-    <ClCompile Include="src\window_manager.cpp" />
     <ClCompile Include="src\manager_base.cpp" />
     <ClCompile Include="src\application.cpp" />
   </ItemGroup>
