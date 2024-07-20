@@ -19,18 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Element.h" />
     <ClInclude Include="include\application.h" />
     <ClInclude Include="include\event_manager.h" />
     <ClInclude Include="include\window.h" />
-    <ClInclude Include="include\manager_base.h" />
+    <ClInclude Include="include\SimMatrix.h" />
+    <ClInclude Include="src\ElementType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Element.cpp" />
+    <ClCompile Include="src\SimMatrix.cpp" />
     <ClCompile Include="src\application.cpp" />
-    <ClCompile Include="src\manager_base.cpp" />
     <ClCompile Include="src\event_manager.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\basic.shader" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

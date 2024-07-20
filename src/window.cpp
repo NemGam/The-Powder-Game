@@ -1,12 +1,15 @@
 #include"window.h"
 #include<iostream>
 
-#include "application.h"
 
 Window::Window(int width, int height, std::string name)
-    :width_(width), height_(height)
+    :data_(height, 
+           std::vector<std::vector<unsigned int>>(width, std::vector<unsigned int>(3, 0))),
+	width_(width), height_(height)
 {
     glfw_window_.reset(glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr));
+
+	
 }
 
 void Window::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {
@@ -50,9 +53,11 @@ GLFWwindow& Window::GetNativeWindow() {
 }
 
 
-void Window::Render() const {
+void Window::Render() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+
     glfwSwapBuffers(glfw_window_.get());
-    glfwPollEvents();
 }
 
 Window::~Window() {

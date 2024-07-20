@@ -2,7 +2,8 @@
 #define WINDOW_H
 #include <memory>
 #include <string>
-#include <glad/glad.h> 
+#include <glad/glad.h>
+#include <vector>
 #include <GLFW/glfw3.h>
 
 struct DestroyGLFWWin {
@@ -18,16 +19,16 @@ public:
 
 private:
 	std::unique_ptr<GLFWwindow, DestroyGLFWWin> glfw_window_;
+	std::vector<std::vector<std::vector<unsigned int>>> data_;
 	int width_;
 	int height_;
-
 
 public: 
 	static Window* Create(int width, int height, const std::string& name);
 	static Window* Create(int width, int height);
 
 	GLFWwindow& GetNativeWindow();
-	void Render() const;
+	void Render();
 	void SetTitle(const std::string& new_name);
 	~Window();
 private:
