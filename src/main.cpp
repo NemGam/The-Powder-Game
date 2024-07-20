@@ -105,15 +105,14 @@ int main() {
     
 
     float vertices[] = {
-        -0.9f, -0.9f, // 0
-        0.9f, -0.9f, // 1
-        0.9f, 0.9f, // 2
-        -0.9f, 0.9f // 3
+        //Poses         //Colors
+        0.5f, -0.5f,   1.0f, 0.0f, 0.0f,// 0
+        -0.5f, -0.5f,     0.0f, 1.0f, 0.0f,// 1
+        0.0f, 0.5f,    0.0f, 0.0f, 1.0f,// 2
     };
 
     unsigned int indices[] = {
-	    0, 1, 2,
-        0, 2, 3
+	    0, 1, 2
     };
 
     //Initialize OpenGL stuff
@@ -130,8 +129,11 @@ int main() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr); //position
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float))); //color
+    glEnableVertexAttribArray(1);
 
     //Unbinding buffers to avoid accidental modification
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -149,8 +151,14 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(shader);
-        glBindVertexArray(vao);
 
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        int vertexColorLocation = glGetUniformLocation(shader, "color");
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+
+        glBindVertexArray(vao);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);
 
