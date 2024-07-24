@@ -37,7 +37,6 @@ void SimMatrix::Swap(int x1, int y1, int x2, int y2) {
 	if (!(IsInBounds(x1, y1) && IsInBounds(x2, y2))) return;
 
 	SwapColorData(x1, y1, x2, y2);
-	std::cout << "Swapping " << x1 << " " << y1 << " and " << x2 << " " << y2 << '\n';
 	std::swap(matrix_[y1][x1], matrix_[y2][x2]);
 }
 

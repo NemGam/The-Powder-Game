@@ -118,6 +118,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, false);
+    glfwSwapInterval(1);
     
     //Start everything up
     Application::Start();
@@ -197,38 +198,48 @@ int main() {
         textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE,
         simulation.GetMatrix().GetColorData()->data());
 
-
-
     glUseProgram(shader);
+    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
     simulation.Start();
+    float deltaTime = 0.0f;
+    float lastFrame = 0.0f;
+    float lastRenderFrame = 0.0f;
 
     int count = 0;
     //Actual loop
-    while(Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
+    while (Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
+
+        float currentFrame = static_cast<float>(glfwGetTime());
+        deltaTime = currentFrame - lastFrame;
+    	lastFrame = currentFrame;
+
+
         count++;
         event_manager.ProcessInput(&window->GetNativeWindow());
 
-        simulation.Update();
+        simulation.Update(deltaTime);
+        std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\r';
+    	glfwPollEvents();
+        if (currentFrame - lastRenderFrame >= 1/60.0f)
+        {
+	        glClear(GL_COLOR_BUFFER_BIT);
+
+	        glBindVertexArray(vao);
+	        glBindTexture(GL_TEXTURE_2D, texture);
+	        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+	        glBindVertexArray(0);
+
+	        glfwSwapBuffers(&window->GetNativeWindow());
 
 
-        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glBindVertexArray(vao);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-        glBindVertexArray(0);
-
-        glfwSwapBuffers(&window->GetNativeWindow());
-
-        
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, simulation.GetMatrix().GetColorData()->data());
-        glfwPollEvents();
+	        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, simulation.GetMatrix().GetColorData()->data());
+            
+            lastRenderFrame = currentFrame;
+		}
     }
 
     //Clean up
-    //glDeleteFramebuffers(1, &fbo);
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
     glDeleteBuffers(1, &ebo);

@@ -9,7 +9,7 @@ public:
 	Simulation(int width, int height);
 
 	void Start();
-	void Update();
+	void Update(float dt);
 
 	SimMatrix& GetMatrix();
 

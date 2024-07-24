@@ -19,8 +19,13 @@ void Simulation::Start() {
 	matrix_.SetParticle(new Sand(), width_ / 2, height_ / 2);
 }
 
-
-void Simulation::Update() {
+float timer = 0;
+void Simulation::Update(float dt) {
+	timer += dt;
+	if (timer >= 2) {
+		matrix_.SetParticle(new Sand(), width_ / 2, height_ - 1);
+		timer = 0;
+	}
 	for (int i = 0; i < height_; ++i) {
 		for (int j = 0; j < width_; ++j) {
 			matrix_.Update(j, i);
