@@ -19,16 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Element.h" />
-    <ClInclude Include="include\application.h" />
-    <ClInclude Include="include\event_manager.h" />
-    <ClInclude Include="include\window.h" />
-    <ClInclude Include="include\SimMatrix.h" />
-    <ClInclude Include="src\ElementType.h" />
+    <ClInclude Include="src\particles\solid\immovable\border_rock.h" />
+    <ClInclude Include="src\particles\immovable_solid_particle.h" />
+    <ClInclude Include="src\particles\gas\air.h" />
+    <ClInclude Include="src\particles\gas_particle.h" />
+    <ClInclude Include="src\particles\solid\movable\sand.h" />
+    <ClInclude Include="src\particles\movable_solid_particle.h" />
+    <ClInclude Include="src\particles\solid_particle.h" />
+    <ClInclude Include="src\particles\particle.h" />
+    <ClInclude Include="src\simulation.h" />
+    <ClInclude Include="src\application.h" />
+    <ClInclude Include="src\event_manager.h" />
+    <ClInclude Include="src\window.h" />
+    <ClInclude Include="src\sim_matrix.h" />
+    <ClInclude Include="src\particles\element_type.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Element.cpp" />
-    <ClCompile Include="src\SimMatrix.cpp" />
+    <ClCompile Include="src\particles\solid\immovable\border_rock.cpp" />
+    <ClCompile Include="src\particles\immovable_solid_particle.cpp" />
+    <ClCompile Include="src\particles\gas\air.cpp" />
+    <ClCompile Include="src\particles\gas_particle.cpp" />
+    <ClCompile Include="src\particles\solid\movable\sand.cpp" />
+    <ClCompile Include="src\particles\movable_solid_particle.cpp" />
+    <ClCompile Include="src\particles\solid_particle.cpp" />
+    <ClCompile Include="src\particles\particle.cpp" />
+    <ClCompile Include="src\simulation.cpp" />
+    <ClCompile Include="src\sim_matrix.cpp" />
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\event_manager.cpp" />
     <ClCompile Include="src\glad.c" />

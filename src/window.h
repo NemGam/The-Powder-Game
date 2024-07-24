@@ -11,7 +11,6 @@ struct DestroyGLFWWin {
 		void operator()(GLFWwindow* ptr) {
 			glfwDestroyWindow(ptr);
 		}
-
 	};
 
 class Window {
