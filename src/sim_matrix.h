@@ -1,5 +1,6 @@
 #ifndef SIM_MATRIX_H
 #define SIM_MATRIX_H
+
 #include <memory>
 #include <vector>
 #include <glad/glad.h>

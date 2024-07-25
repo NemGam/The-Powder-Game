@@ -20,12 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\particles\solid\immovable\border_rock.h" />
-    <ClInclude Include="src\particles\immovable_solid_particle.h" />
+    <ClInclude Include="src\particles\solid\immovable\immovable_solid_particle.h" />
     <ClInclude Include="src\particles\gas\air.h" />
-    <ClInclude Include="src\particles\gas_particle.h" />
+    <ClInclude Include="src\particles\gas\gas_particle.h" />
     <ClInclude Include="src\particles\solid\movable\sand.h" />
-    <ClInclude Include="src\particles\movable_solid_particle.h" />
-    <ClInclude Include="src\particles\solid_particle.h" />
+    <ClInclude Include="src\particles\solid\movable\movable_solid_particle.h" />
+    <ClInclude Include="src\particles\solid\solid_particle.h" />
     <ClInclude Include="src\particles\particle.h" />
     <ClInclude Include="src\simulation.h" />
     <ClInclude Include="src\application.h" />
@@ -36,12 +36,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\particles\solid\immovable\border_rock.cpp" />
-    <ClCompile Include="src\particles\immovable_solid_particle.cpp" />
+    <ClCompile Include="src\particles\solid\immovable\immovable_solid_particle.cpp" />
     <ClCompile Include="src\particles\gas\air.cpp" />
-    <ClCompile Include="src\particles\gas_particle.cpp" />
+    <ClCompile Include="src\particles\gas\gas_particle.cpp" />
     <ClCompile Include="src\particles\solid\movable\sand.cpp" />
-    <ClCompile Include="src\particles\movable_solid_particle.cpp" />
-    <ClCompile Include="src\particles\solid_particle.cpp" />
+    <ClCompile Include="src\particles\solid\movable\movable_solid_particle.cpp" />
+    <ClCompile Include="src\particles\solid\solid_particle.cpp" />
     <ClCompile Include="src\particles\particle.cpp" />
     <ClCompile Include="src\simulation.cpp" />
     <ClCompile Include="src\sim_matrix.cpp" />
@@ -58,8 +58,9 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4dffbf98-ad7b-4d7b-af96-ddc6df913fd2}</ProjectGuid>
-    <RootNamespace>ThePowderGame</RootNamespace>
+    <RootNamespace>ThePowderSim</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ThePowderSim</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -107,11 +108,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderGame\include;D:\Libraries\includes;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderSim\src;D:\Libraries\includes;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Libraries\glfw-3.4\build\src\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderGame\include;D:\Libraries\includes;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderSim\src;D:\Libraries\includes;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Libraries\glfw-3.4\build\src\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

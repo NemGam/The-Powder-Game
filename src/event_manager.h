@@ -1,5 +1,5 @@
-#pragma once
-#include <iostream>
+#ifndef EVENT_MANAGER_H
+#define EVENT_MANAGER_H
 
 #include "window.h"
 
@@ -10,3 +10,4 @@ public:
 	
 private:
 };
+#endif // EVENT_MANAGER_H

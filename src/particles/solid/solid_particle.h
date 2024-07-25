@@ -1,7 +1,7 @@
 #ifndef SOLID_PARTICLE_H
 #define SOLID_PARTICLE_H
 
-#include "particle.h"
+#include "particles/particle.h"
 
 class SolidParticle :
     public Particle

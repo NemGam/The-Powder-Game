@@ -1,6 +1,7 @@
 #ifndef AIR_H
 #define AIR_H
-#include "../gas_particle.h"
+
+#include "particles/gas/gas_particle.h"
 
 class Air final :
     public GasParticle

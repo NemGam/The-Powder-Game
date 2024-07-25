@@ -1,6 +1,6 @@
 #ifndef MOVABLE_SOLID_PARTICLE_H
 #define MOVABLE_SOLID_PARTICLE_H
-#include "solid_particle.h"
+#include "particles/solid/solid_particle.h"
 
 class MovableSolidParticle :
     public SolidParticle

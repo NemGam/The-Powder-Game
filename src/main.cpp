@@ -1,13 +1,13 @@
 #include <array>
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 #include "application.h"
 #include "event_manager.h"
 #include "window.h"
-#include <fstream>
-#include <sstream>
-
 #include "simulation.h"
 
 constexpr int kWindowHeight = 640;
@@ -95,47 +95,18 @@ static unsigned int CreateShader(const std::string vertexShader, const std::stri
 constexpr int textureWidth = 100;
 constexpr int textureHeight = 100;
 
-static GLubyte checkImage[textureWidth][textureHeight][4];
-
-void makeCheckImage()
-{
-	for (int i = 0; i < textureWidth; i++) {
-        for (int j = 0; j < textureHeight; j++) {
-
-            checkImage[i][j][0] = 255;//count % 255;
-            checkImage[i][j][1] = 0;//(count / 255) % 255;
-            checkImage[i][j][2] = 0;//(count / 255 / 255) % 255;
-            checkImage[i][j][3] = 1;//(count / 255 / 255) % 255;
-        }
-    }
-}
-
-
 int main() {
-
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, false);
-    glfwSwapInterval(1);
     
     //Start everything up
     Application::Start();
-
+    glfwSwapInterval(1);
     auto window = std::unique_ptr<Window>(Window::Create(kWindowWidth, kWindowHeight, "The Powder Game"));
     EventManager event_manager = EventManager();
-
+    glfwSwapInterval(1);
     
 
     std::cout << glGetString(GL_VERSION) << "\n";
 
-
-    float texCoords[] = {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        0.5f, 1.0f
-    };
 
     float vertices[] = {
         //Poses         //Texture poses
@@ -176,9 +147,6 @@ int main() {
 	unsigned int shader = CreateShader(source.vertex, source.fragment);
 
     //CREATING TEXTURE
-    std::cout << shader << std::endl;
-
-    makeCheckImage();
 
     unsigned int texture;   
     glGenTextures(1, &texture);
@@ -202,6 +170,7 @@ int main() {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
     simulation.Start();
+
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
     float lastRenderFrame = 0.0f;
@@ -221,7 +190,7 @@ int main() {
         simulation.Update(deltaTime);
         std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\r';
     	glfwPollEvents();
-        if (currentFrame - lastRenderFrame >= 1/60.0f)
+        //if (currentFrame - lastRenderFrame >= 1/60.0f)
         {
 	        glClear(GL_COLOR_BUFFER_BIT);
 
@@ -237,6 +206,7 @@ int main() {
             
             lastRenderFrame = currentFrame;
 		}
+        
     }
 
     //Clean up

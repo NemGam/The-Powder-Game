@@ -13,13 +13,13 @@
     <ClInclude Include="src\particles\element_type.h" />
     <ClInclude Include="src\simulation.h" />
     <ClInclude Include="src\particles\particle.h" />
-    <ClInclude Include="src\particles\solid_particle.h" />
-    <ClInclude Include="src\particles\movable_solid_particle.h" />
+    <ClInclude Include="src\particles\solid\solid_particle.h" />
+    <ClInclude Include="src\particles\solid\movable\movable_solid_particle.h" />
     <ClInclude Include="src\particles\solid\movable\sand.h" />
     <ClInclude Include="src\particles\gas\air.h" />
-    <ClInclude Include="src\particles\gas_particle.h" />
+    <ClInclude Include="src\particles\gas\gas_particle.h" />
     <ClInclude Include="src\window.h" />
-    <ClInclude Include="src\particles\immovable_solid_particle.h" />
+    <ClInclude Include="src\particles\solid\immovable\immovable_solid_particle.h" />
     <ClInclude Include="src\particles\solid\immovable\border_rock.h" />
   </ItemGroup>
   <ItemGroup>
@@ -31,12 +31,12 @@
     <ClCompile Include="src\sim_matrix.cpp" />
     <ClCompile Include="src\simulation.cpp" />
     <ClCompile Include="src\particles\particle.cpp" />
-    <ClCompile Include="src\particles\solid_particle.cpp" />
-    <ClCompile Include="src\particles\movable_solid_particle.cpp" />
+    <ClCompile Include="src\particles\solid\solid_particle.cpp" />
+    <ClCompile Include="src\particles\solid\movable\movable_solid_particle.cpp" />
     <ClCompile Include="src\particles\solid\movable\sand.cpp" />
     <ClCompile Include="src\particles\gas\air.cpp" />
-    <ClCompile Include="src\particles\gas_particle.cpp" />
-    <ClCompile Include="src\particles\immovable_solid_particle.cpp" />
+    <ClCompile Include="src\particles\gas\gas_particle.cpp" />
+    <ClCompile Include="src\particles\solid\immovable\immovable_solid_particle.cpp" />
     <ClCompile Include="src\particles\solid\immovable\border_rock.cpp" />
   </ItemGroup>
   <ItemGroup>

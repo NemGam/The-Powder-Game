@@ -1,4 +1,4 @@
-#include "gas_particle.h"
+#include "particles/gas/gas_particle.h"
 
 void GasParticle::Move(SimMatrix& matrix, int x, int y) {
 	return;

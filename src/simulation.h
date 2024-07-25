@@ -1,5 +1,6 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
+
 #include "sim_matrix.h"
 
 class Simulation

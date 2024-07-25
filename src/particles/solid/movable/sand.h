@@ -1,6 +1,8 @@
 #ifndef SAND_PARTICLE_H
 #define SAND_PARTICLE_H
-#include "../../movable_solid_particle.h"
+
+#include "particles/solid/movable/movable_solid_particle.h"
+
 class Sand final :
     public MovableSolidParticle
 {

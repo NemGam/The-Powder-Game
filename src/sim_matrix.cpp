@@ -1,10 +1,9 @@
-#include "sim_matrix.h"
-#include "particles/gas/air.h"
 #include <algorithm>
 #include <iostream>
-#include <iterator>
 #include <glad/glad.h>
 
+#include "sim_matrix.h"
+#include "particles/gas/air.h"
 #include "particles/solid/immovable/border_rock.h"
 
 SimMatrix::SimMatrix(int width, int height) :

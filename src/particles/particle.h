@@ -2,8 +2,9 @@
 #define PARTICLE_H
 
 #include <array>
+
 #include "element_type.h"
-#include "../sim_matrix.h"
+#include "sim_matrix.h"
 
 class Particle
 {
