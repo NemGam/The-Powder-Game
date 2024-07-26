@@ -1,6 +1,7 @@
-#include "application.h"
 #include <iostream>
 #include <GLFW/glfw3.h>
+
+#include "application.h"
 
 bool Application::is_running_;
 
@@ -11,6 +12,7 @@ void Application::Start() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, false);
+	
 }
 
 bool Application::IsRunning() {

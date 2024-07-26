@@ -58,6 +58,14 @@ const std::vector<GLubyte>* SimMatrix::GetColorData() const {
 	return &color_data_;
 }
 
+int SimMatrix::GetWidth() const {
+	return width_;
+}
+
+int SimMatrix::GetHeight() const {
+	return height_;
+}
+
 void SimMatrix::ChangeColorAt(int x, int y, std::array<GLubyte,4> color) {
 	//std::memcpy(color_data_[y][x].data(), color.data(), color.size());
 	int ind = GetColorIndexFromCoordinates(x, y);

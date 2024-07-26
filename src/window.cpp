@@ -20,6 +20,14 @@ void Window::SetTitle(const std::string& new_name){
     glfwSetWindowTitle(glfw_window_.get(), new_name.c_str());
 }
 
+int Window::GetWidth() const {
+    return width_;
+}
+
+int Window::GetHeight() const {
+    return height_;
+}
+
 
 Window* Window::Create(int width, int height) {
     return Create(width, height, "Main Window");

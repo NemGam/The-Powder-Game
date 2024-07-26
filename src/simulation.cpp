@@ -3,8 +3,10 @@
 #include "particles/gas/air.h"
 #include "particles/solid/movable/sand.h"
 
-Simulation::Simulation(int width, int height) :
+Simulation::Simulation(const Window* window, int width, int height) :
+	window_(window),
 	matrix_(width, height),
+	brush_(window, &matrix_),
 	width_(width),
 	height_(height)
 {
@@ -26,6 +28,7 @@ void Simulation::Update(float dt) {
 		matrix_.SetParticle(new Sand(), width_ / 2, height_ - 1);
 		timer = 0;
 	}
+	brush_.Update();
 	for (int i = 0; i < height_; ++i) {
 		for (int j = 0; j < width_; ++j) {
 			matrix_.Update(j, i);

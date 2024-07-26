@@ -7,7 +7,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\event_manager.h" />
+    <ClInclude Include="src\input_manager.h" />
     <ClInclude Include="src\application.h" />
     <ClInclude Include="src\sim_matrix.h" />
     <ClInclude Include="src\particles\element_type.h" />
@@ -21,9 +21,11 @@
     <ClInclude Include="src\window.h" />
     <ClInclude Include="src\particles\solid\immovable\immovable_solid_particle.h" />
     <ClInclude Include="src\particles\solid\immovable\border_rock.h" />
+    <ClInclude Include="src\brush.h" />
+    <ClInclude Include="src\utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\event_manager.cpp" />
+    <ClCompile Include="src\input_manager.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\window.cpp" />
@@ -38,6 +40,8 @@
     <ClCompile Include="src\particles\gas\gas_particle.cpp" />
     <ClCompile Include="src\particles\solid\immovable\immovable_solid_particle.cpp" />
     <ClCompile Include="src\particles\solid\immovable\border_rock.cpp" />
+    <ClCompile Include="src\brush.cpp" />
+    <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />

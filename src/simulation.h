@@ -1,13 +1,15 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
+#include "brush.h"
 #include "sim_matrix.h"
+#include "window.h"
 
 class Simulation
 {
 public:
 
-	Simulation(int width, int height);
+	Simulation(const Window* window, int width, int height);
 
 	void Start();
 	void Update(float dt);
@@ -15,7 +17,9 @@ public:
 	SimMatrix& GetMatrix();
 
 private:
+	const Window* window_;
 	SimMatrix matrix_;
+	Brush brush_;
 	int width_;
 	int height_;
 };

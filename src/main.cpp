@@ -6,7 +6,8 @@
 #include <iostream>
 
 #include "application.h"
-#include "event_manager.h"
+#include "brush.h"
+#include "input_manager.h"
 #include "window.h"
 #include "simulation.h"
 
@@ -91,6 +92,20 @@ static unsigned int CreateShader(const std::string vertexShader, const std::stri
 }
 
 
+void ProcessInput() {
+    if (InputManager::GetInstance().IsKeyDown(GLFW_KEY_ESCAPE)) {
+        Application::Quit();
+    }
+
+    if (InputManager::GetInstance().IsKeyDown(GLFW_KEY_F1)) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+
+    if (InputManager::GetInstance().IsKeyDown(GLFW_KEY_F2)) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+}
+
 
 constexpr int textureWidth = 100;
 constexpr int textureHeight = 100;
@@ -99,13 +114,15 @@ int main() {
     
     //Start everything up
     Application::Start();
-    glfwSwapInterval(1);
     auto window = std::unique_ptr<Window>(Window::Create(kWindowWidth, kWindowHeight, "The Powder Game"));
-    EventManager event_manager = EventManager();
-    glfwSwapInterval(1);
-    
+    InputManager::Initialize(&window->GetNativeWindow());
 
+
+	glfwSwapInterval(1);
+    
     std::cout << glGetString(GL_VERSION) << "\n";
+
+    
 
 
     float vertices[] = {
@@ -160,7 +177,7 @@ int main() {
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    Simulation simulation(textureWidth, textureHeight);
+    Simulation simulation(window.get(), textureWidth, textureHeight);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth,
         textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE,
@@ -183,12 +200,12 @@ int main() {
         deltaTime = currentFrame - lastFrame;
     	lastFrame = currentFrame;
 
-
+        ProcessInput();
+        
         count++;
-        event_manager.ProcessInput(&window->GetNativeWindow());
 
         simulation.Update(deltaTime);
-        std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\r';
+        //std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\r';
     	glfwPollEvents();
         //if (currentFrame - lastRenderFrame >= 1/60.0f)
         {
