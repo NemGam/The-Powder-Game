@@ -3,8 +3,17 @@
 void MovableSolidParticle::Move(SimMatrix& matrix, int x, int y) {
 
 	if (matrix.GetMaterial(x, y - 1) == Material::kAir || matrix.GetMaterial(x, y - 1) == Material::kWater) {
+		for (int i = 1; i < 4; i++) {
+			if (matrix.GetMaterial(x, y - i) == Material::kAir || matrix.GetMaterial(x, y - i) == Material::kWater) 
+				continue;
+
+			matrix.Swap(x, y, x, y - i + 1);
+			return;
+		}
+
+		matrix.Swap(x, y, x, y - 3);
 		//Check south
-		matrix.Swap(x, y, x, y - 1);
+		
 	}
 	else if (matrix.GetParticle(x - 1, y - 1)->GetMaterial() == Material::kAir || matrix.GetMaterial(x - 1, y - 1) == Material::kWater) {
 		//Check south-west
@@ -13,6 +22,9 @@ void MovableSolidParticle::Move(SimMatrix& matrix, int x, int y) {
 	else if (matrix.GetParticle(x + 1, y - 1)->GetMaterial() == Material::kAir || matrix.GetMaterial(x + 1, y - 1) == Material::kWater) {
 		//Check south-east
 		matrix.Swap(x, y, x + 1, y - 1);
+	}
+	else {
+		is_sleeping_ = true;
 	}
 	//Stop if no possible moves
 }

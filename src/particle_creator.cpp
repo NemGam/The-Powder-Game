@@ -1,9 +1,20 @@
 #include "particle_creator.h"
+
+#include <algorithm>
+
 #include "particles.h"
+#include "core/random.h"
 #include "particles/solid/immovable/border_rock.h"
 
-Particle* ParticleCreator::GetParticleByMaterial(Material material) {
-	return GetInstance().particles_[material]->Clone();
+Particle* ParticleCreator::GetParticleByMaterial(Material material, bool randomize_color) {
+	Particle* particle = GetInstance().particles_[material]->Clone();
+	if (randomize_color) {
+		auto color = particle->GetColor();
+		for (int i = 0; i < 3; i++)
+			color[i] = std::clamp(color[i] + static_cast<int>(random::RandomUnit() * 10), 0, 255);
+		particle->SetColor(color);
+	}
+	return particle;
 }
 
 ParticleCreator::ParticleCreator() {

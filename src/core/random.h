@@ -8,6 +8,9 @@ namespace random {
 
 	//Generates a random number from 0 to 1 inclusive.
 	float Random();
+
+	//Generates a random number from -1 to 1 inclusive.
+	float RandomUnit();
 }
 
 #endif // RANDOM_H

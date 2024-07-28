@@ -14,7 +14,7 @@ public:
 
 
 	//Returns copy of the particle with the given element
-	static Particle* GetParticleByMaterial(Material material);
+	static Particle* GetParticleByMaterial(Material material, bool randomize_color = true);
 
 private:
 	ParticleCreator();

@@ -18,6 +18,7 @@ public:
 private:
 	void CreateParticles(double x, double y) const;
 	void EraseParticles(double x, double y) const;
+	void Fill(Material material, double x, double y, float chance = 1.0f) const;
 
 	Material current_material_;
 	SimMatrix* matrix_;

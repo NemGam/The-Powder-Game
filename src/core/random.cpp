@@ -11,4 +11,8 @@ namespace random {
 		
 		return static_cast<float>(num) / static_cast<float>(kUintMax);
 	}
+
+	float RandomUnit() {
+		return Random() * 2 - 1;
+	}
 }

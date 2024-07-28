@@ -18,22 +18,24 @@ void Brush::SetMaterial(Material material) {
 }
 
 void Brush::CreateParticles(double x, double y) const {
-	auto [x_coord, y_coord] = utils::FromWindowToMatrix(window_, matrix_, x, y);
-
-	for (int i = x_coord - radius_; i <= x_coord + radius_; i++) {
-		for (int j = y_coord - radius_; j <= y_coord + radius_; j++) {
-			if (random::Random() > 0.5f)
-				matrix_->SetParticle(current_material_, i, j);
-		}
-	}
+	Fill(current_material_, x, y, 0.5f);
 }
 
 void Brush::EraseParticles(double x, double y) const {
-	auto [x_coord, y_coord] = utils::FromWindowToMatrix(window_, matrix_, x, y);
+	Fill(Material::kAir, x, y);
+}
 
-	for (int i = x_coord - radius_; i <= x_coord + radius_; i++) {
-		for (int j = y_coord - radius_; j <= y_coord + radius_; j++) {
-			matrix_->SetParticle(Material::kAir, i, j);
+void Brush::Fill(Material material, double x, double y, float chance) const {
+	auto [x_coord, y_coord] = utils::FromWindowToMatrix(window_, matrix_, x, y);
+	int minI = std::max(x_coord - radius_, 0);
+	int maxI = std::min(x_coord + radius_, matrix_->GetWidth() - 1);
+	int minJ = std::max(y_coord - radius_, 0);
+	int maxJ = std::min(y_coord + radius_, matrix_->GetHeight() - 1);
+
+	for (int i = minI; i <= maxI; i++) {
+		for (int j = minJ; j <= maxJ; j++) {
+			if (random::Random() <= chance)
+				matrix_->SetParticle(material, i, j);
 		}
 	}
 }

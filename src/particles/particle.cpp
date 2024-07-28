@@ -9,8 +9,23 @@ const std::array<GLubyte, 4>& Particle::GetColor() const{
 	return color_;
 }
 
+void Particle::SetColor(const std::array<GLubyte, 4>& color) {
+	color_[0] = color[0];
+	color_[1] = color[1];
+	color_[2] = color[2];
+	color_[3] = color[3];
+}
+
 void Particle::Update(SimMatrix& matrix, int x, int y) {
-	Move(matrix, x, y);
+	if (!is_sleeping_) {
+		Move(matrix, x, y);
+		update_flag_ = !update_flag_;
+	}
+		
+}
+
+void Particle::WakeUp() {
+	is_sleeping_ = false;
 }
 
 bool Particle::GetUpdateFlag() const {
@@ -19,6 +34,7 @@ bool Particle::GetUpdateFlag() const {
 
 Particle::Particle(Material element, const std::array<GLubyte, 4>& color) :
 	update_flag_(false),
+	is_sleeping_(false),
 	element_(element),
 	color_{color}
 {}

@@ -7,11 +7,10 @@
 #include <GLFW/glfw3.h>
 
 struct DestroyGLFWWin {
-
-		void operator()(GLFWwindow* ptr) {
-			glfwDestroyWindow(ptr);
-		}
-	};
+	void operator()(GLFWwindow* ptr) {
+		glfwDestroyWindow(ptr);
+	}
+};
 
 class Window {
 public: 

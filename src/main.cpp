@@ -118,7 +118,6 @@ int main() {
 	InputManager::Initialize(&window->GetNativeWindow());
 
 
-	glfwSwapInterval(1);
 
 	std::cout << glGetString(GL_VERSION) << "\n";
 
@@ -202,7 +201,7 @@ int main() {
 		count++;
 
 		simulation.Update(deltaTime);
-		std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\r';
+		std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\n';
 		glfwPollEvents();
 		//if (currentFrame - lastRenderFrame >= 1/60.0f)
 		{

@@ -18,9 +18,9 @@ SimMatrix::SimMatrix(int width, int height) :
 	std::cout << (width * height * 4) << std::endl;
 	for (int i = 0; i < height; ++i) {
 		for (int j = 0; j < width; ++j) {
-			Particle* part = new Air();
+			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kSand);
 			matrix_[i][j] = part;
-			ChangeColorAt(j, i, part->GetColor());
+			ChangeColorAt(j, i, part->GetColor()); 
 		}
 	}
 }
@@ -46,6 +46,14 @@ void SimMatrix::Update(int x, int y) {
 	matrix_[y][x]->Update(*this, x, y);
 }
 
+void SimMatrix::WakeUpNeighbours(int x, int y) const {
+	for (int i = x - 1; i <= x + 1; i++) {
+		for (int j = y - 1; j <= y + 1; j++) {
+			matrix_[j][i]->WakeUp();
+		}
+	}
+}
+
 void SimMatrix::SetParticle(Material material, int x, int y) {
 	if (!IsInBounds(x, y)) return;
 
@@ -54,7 +62,7 @@ void SimMatrix::SetParticle(Material material, int x, int y) {
 	Particle* particle = ParticleCreator::GetParticleByMaterial(material);
 	matrix_[y][x] = particle;
 	ChangeColorAt(x, y, particle->GetColor());
-	
+	WakeUpNeighbours(x, y);
 }
 
 

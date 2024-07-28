@@ -21,6 +21,7 @@ public:
 
 	void Swap(int x1, int y1, int x2, int y2);
 	void Update(int x, int y);
+	void WakeUpNeighbours(int x, int y) const;
 	void SetParticle(Material material, int x, int y);
 	[[nodiscard]] Particle* GetParticle(int x, int y) const;
 	//Returns material of a particle at a given point

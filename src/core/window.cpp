@@ -39,8 +39,9 @@ Window* Window::Create(int width, int height, const std::string& name) {
         std::cerr << "Failed to create GLFW window\n";
         return nullptr;
     }
-
+    //glfwSwapInterval(1);
     glfwMakeContextCurrent(window->glfw_window_.get());
+    //glfwSwapInterval(1);
 
     if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         std::cerr << "Failed to initialize GLAD\n";

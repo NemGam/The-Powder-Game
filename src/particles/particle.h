@@ -16,8 +16,10 @@ public:
 
 	[[nodiscard]] Material GetMaterial() const;
 	[[nodiscard]] const std::array<GLubyte, 4>& GetColor() const;
+	void SetColor(const std::array<GLubyte, 4>& color);
 	void Update(SimMatrix& matrix, int x, int y);
 	virtual void Move(SimMatrix& matrix, int x, int y) = 0;
+	void WakeUp();
 	[[nodiscard]] bool GetUpdateFlag() const;
 
 
@@ -31,6 +33,7 @@ protected:
 
 
 	bool update_flag_;
+	bool is_sleeping_;
 	Material element_;
 	std::array<GLubyte, 4> color_;
 };
