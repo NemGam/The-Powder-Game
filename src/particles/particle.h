@@ -14,7 +14,7 @@ public:
 	virtual ~Particle() = default;
 
 
-	[[nodiscard]] Material GetElement() const;
+	[[nodiscard]] Material GetMaterial() const;
 	[[nodiscard]] const std::array<GLubyte, 4>& GetColor() const;
 	void Update(SimMatrix& matrix, int x, int y);
 	virtual void Move(SimMatrix& matrix, int x, int y) = 0;

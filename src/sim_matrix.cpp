@@ -57,9 +57,17 @@ void SimMatrix::SetParticle(Material material, int x, int y) {
 	
 }
 
+
+
 Particle* SimMatrix::GetParticle(int x, int y) const {
 	if (!IsInBounds(x, y)) return border_particle_.get();
 	return matrix_[y][x];
+}
+
+Material SimMatrix::GetMaterial(int x, int y) const {
+	if (!IsInBounds(x, y)) return Material::kBorderRock;
+
+	return matrix_[y][x]->GetMaterial();
 }
 
 const std::vector<GLubyte>* SimMatrix::GetColorData() const {

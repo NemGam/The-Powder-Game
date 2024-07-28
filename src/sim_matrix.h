@@ -23,6 +23,8 @@ public:
 	void Update(int x, int y);
 	void SetParticle(Material material, int x, int y);
 	[[nodiscard]] Particle* GetParticle(int x, int y) const;
+	//Returns material of a particle at a given point
+	[[nodiscard]] Material GetMaterial(int x, int y) const;
 	[[nodiscard]] const std::vector<GLubyte>* GetColorData() const;
 	[[nodiscard]] int GetWidth() const;
 	[[nodiscard]] int GetHeight() const;

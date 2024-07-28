@@ -13,7 +13,7 @@ Brush::Brush(const Window* window, SimMatrix* matrix) :
 {}
 
 void Brush::SetMaterial(Material material) {
-	//std::cout << "Chosen particle is " << static_cast<int>(particle->GetElement()) << '\n';
+	//std::cout << "Chosen particle is " << static_cast<int>(particle->GetMaterial()) << '\n';
 	current_material_ = material;
 }
 

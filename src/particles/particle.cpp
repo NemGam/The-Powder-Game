@@ -1,7 +1,7 @@
 #include <array>
 #include "particle.h"
 
-Material Particle::GetElement() const {
+Material Particle::GetMaterial() const {
 	return element_;
 }
 

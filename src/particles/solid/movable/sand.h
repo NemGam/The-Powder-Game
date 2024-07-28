@@ -10,7 +10,6 @@ public:
 	Sand();
 
 	[[nodiscard]] Sand* Clone() const override;
-	void Move(SimMatrix& matrix, int x, int y) override;
 };
 
 #endif // SAND_PARTICLE_H
