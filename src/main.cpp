@@ -185,23 +185,22 @@ int main() {
 
 	simulation.Start();
 
-	float deltaTime = 0.0f;
-	float lastFrame = 0.0f;
-	float lastRenderFrame = 0.0f;
+	float last_frame = 0.0f;
+	float last_render_frame = 0.0f;
 
-	int count = 0;
+	
+
 	//Actual loop
 	while (Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
 		float currentFrame = static_cast<float>(glfwGetTime());
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
+		float deltaTime = currentFrame - last_frame;
+		last_frame = currentFrame;
 
 		ProcessInput();
 
-		count++;
 
 		simulation.Update(deltaTime);
-		std::cout << static_cast<int>(1 / (currentFrame - lastRenderFrame)) << '\n';
+		std::cout << static_cast<int>(1 / (currentFrame - last_render_frame)) << '\n';
 		glfwPollEvents();
 		//if (currentFrame - lastRenderFrame >= 1/60.0f)
 		{
@@ -218,7 +217,7 @@ int main() {
 			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE,
 			                simulation.GetMatrix().GetColorData()->data());
 
-			lastRenderFrame = currentFrame;
+			last_render_frame = currentFrame;
 		}
 	}
 

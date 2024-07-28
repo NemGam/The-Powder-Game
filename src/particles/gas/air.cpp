@@ -9,5 +9,6 @@ Air* Air::Clone() const {
 }
 
 void Air::Move(SimMatrix& matrix, int x, int y) {
+	is_sleeping_ = true;
 	return;
 }

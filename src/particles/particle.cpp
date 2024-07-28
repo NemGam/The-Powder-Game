@@ -1,6 +1,8 @@
 #include <array>
 #include "particle.h"
 
+int Particle::DEBUG_UPDATED;
+
 Material Particle::GetMaterial() const {
 	return element_;
 }
@@ -16,8 +18,10 @@ void Particle::SetColor(const std::array<GLubyte, 4>& color) {
 	color_[3] = color[3];
 }
 
+
 void Particle::Update(SimMatrix& matrix, int x, int y) {
 	if (!is_sleeping_) {
+		DEBUG_UPDATED++;
 		Move(matrix, x, y);
 		update_flag_ = !update_flag_;
 	}

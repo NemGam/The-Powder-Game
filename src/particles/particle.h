@@ -23,6 +23,9 @@ public:
 	[[nodiscard]] bool GetUpdateFlag() const;
 
 
+	static int DEBUG_UPDATED;
+
+
 	friend class ParticleCreator;
 
 protected:

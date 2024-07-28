@@ -11,6 +11,7 @@ class Particle;
 
 class SimMatrix {
 public:
+	//Creates matrix. Make sure that the max area is < 100000000.
 	SimMatrix(int width, int height);
 	SimMatrix(SimMatrix&) = delete;
 	SimMatrix(SimMatrix&&) = delete;

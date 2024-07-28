@@ -24,7 +24,7 @@ void MovableSolidParticle::Move(SimMatrix& matrix, int x, int y) {
 		matrix.Swap(x, y, x + 1, y - 1);
 	}
 	else {
-		is_sleeping_ = false;
+		is_sleeping_ = true;
 	}
 	//Stop if no possible moves
 }

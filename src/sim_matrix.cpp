@@ -13,9 +13,13 @@ SimMatrix::SimMatrix(int width, int height) :
 	height_(height),
 	matrix_(height + 2, std::vector<Particle*>(width + 2))
 {
+	Particle::DEBUG_UPDATED = 0;
+	if (width * height > 10000000) {
+		std::cerr << "Matrix area must be < 10,000,000" << '\n';
+	}
 	border_particle_ = std::make_unique<BorderRock>();
 	color_data_.resize(width * height * 4);
-	std::cout << (width * height * 4) << std::endl;
+	std::cout << (width * height * 4) << '\n';
 
 	for (int i = 0; i < height + 2; ++i) {
 		for (int j = 0; j < width + 2; ++j) {
@@ -25,7 +29,7 @@ SimMatrix::SimMatrix(int width, int height) :
 				matrix_[i][j] = ParticleCreator::GetParticleByMaterial(Material::kBorderRock);
 				continue;
 			}
-			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir);
+			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kSand);
 			matrix_[i][j] = part;
 			ChangeColorAt(j - 1, i - 1, part->GetColor()); 
 		}
@@ -41,13 +45,16 @@ SimMatrix::~SimMatrix() {
 }
 
 void SimMatrix::Swap(int x1, int y1, int x2, int y2) {
-	SwapColorData(x1, y1, x2, y2);
-	std::swap(matrix_[y1 + 1][x1 + 1], matrix_[y2 + 1][x2 + 1]);
+	//Border
+	y1++; x1++; y2++; x2++;
+	std::swap(matrix_[y1][x1], matrix_[y2][x2]);
+	WakeUpNeighbours(x1, y1);
+	WakeUpNeighbours(x2, y2);
+	SwapColorData(x1 - 1, y1 - 1, x2 - 1, y2 - 1);
 }
 
 void SimMatrix::Update(int x, int y) {
 	if (matrix_[y + 1][x + 1]->GetUpdateFlag() == update_flag_) return;
-
 	matrix_[y + 1][x + 1]->Update(*this, x, y);
 }
 
@@ -68,7 +75,7 @@ void SimMatrix::SetParticle(Material material, int x, int y) {
 	Particle* particle = ParticleCreator::GetParticleByMaterial(material);
 	matrix_[y][x] = particle;
 	ChangeColorAt(x - 1, y - 1, particle->GetColor());
-	//WakeUpNeighbours(x, y);
+	WakeUpNeighbours(x, y);
 }
 
 
@@ -94,6 +101,8 @@ int SimMatrix::GetHeight() const {
 }
 
 void SimMatrix::FlipUpdateFlag() {
+	std::cout << "Actually updated: " << Particle::DEBUG_UPDATED << '\n';
+	Particle::DEBUG_UPDATED = 0;
 	update_flag_ = !update_flag_;
 }
 

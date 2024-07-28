@@ -10,9 +10,6 @@ class BorderRock final :
 public:
 	BorderRock();
 
-
-	~BorderRock() override;
-
 	[[nodiscard]] BorderRock* Clone() const override;
 };
 
