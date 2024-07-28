@@ -14,6 +14,8 @@ public:
 	SimMatrix(int width, int height);
 	SimMatrix(SimMatrix&) = delete;
 	SimMatrix(SimMatrix&&) = delete;
+	SimMatrix& operator=(const SimMatrix&) = delete;
+	SimMatrix&& operator=(SimMatrix&&) = delete;
 
 
 	~SimMatrix();

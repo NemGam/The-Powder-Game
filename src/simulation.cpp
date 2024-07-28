@@ -2,6 +2,7 @@
 
 Simulation::Simulation(const Window* window, int width, int height) :
 	matrix_(width, height),
+
 	brush_(window, &matrix_),
 	width_(width),
 	height_(height)

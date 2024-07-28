@@ -11,39 +11,44 @@ SimMatrix::SimMatrix(int width, int height) :
 	update_flag_(true),
 	width_(width),
 	height_(height),
-	matrix_(height, std::vector<Particle*>(width))
+	matrix_(height + 2, std::vector<Particle*>(width + 2))
 {
 	border_particle_ = std::make_unique<BorderRock>();
 	color_data_.resize(width * height * 4);
 	std::cout << (width * height * 4) << std::endl;
-	for (int i = 0; i < height; ++i) {
-		for (int j = 0; j < width; ++j) {
-			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kSand);
+
+	for (int i = 0; i < height + 2; ++i) {
+		for (int j = 0; j < width + 2; ++j) {
+
+			//Creating a border
+			if (i == 0 || j == 0 || j == width + 1 || i == height + 1) {
+				matrix_[i][j] = ParticleCreator::GetParticleByMaterial(Material::kBorderRock);
+				continue;
+			}
+			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir);
 			matrix_[i][j] = part;
-			ChangeColorAt(j, i, part->GetColor()); 
+			ChangeColorAt(j - 1, i - 1, part->GetColor()); 
 		}
 	}
 }
 
 SimMatrix::~SimMatrix() {
-	for (int i = 0; i < height_; ++i) {
-		for (int j = 0; j < width_; ++j) {
+	for (int i = 0; i < height_ + 2; ++i) {
+		for (int j = 0; j < width_ + 2; ++j) {
 			delete matrix_[i][j];
 		}
 	}
 }
 
 void SimMatrix::Swap(int x1, int y1, int x2, int y2) {
-	if (!(IsInBounds(x1, y1) && IsInBounds(x2, y2))) return;
-
 	SwapColorData(x1, y1, x2, y2);
-	std::swap(matrix_[y1][x1], matrix_[y2][x2]);
+	std::swap(matrix_[y1 + 1][x1 + 1], matrix_[y2 + 1][x2 + 1]);
 }
 
 void SimMatrix::Update(int x, int y) {
-	if (matrix_[y][x]->GetUpdateFlag() == update_flag_) return;
+	if (matrix_[y + 1][x + 1]->GetUpdateFlag() == update_flag_) return;
 
-	matrix_[y][x]->Update(*this, x, y);
+	matrix_[y + 1][x + 1]->Update(*this, x, y);
 }
 
 void SimMatrix::WakeUpNeighbours(int x, int y) const {
@@ -55,27 +60,25 @@ void SimMatrix::WakeUpNeighbours(int x, int y) const {
 }
 
 void SimMatrix::SetParticle(Material material, int x, int y) {
-	if (!IsInBounds(x, y)) return;
+	//Don't forget about the border!
+	x++; y++;
 
 	delete matrix_[y][x];
 
 	Particle* particle = ParticleCreator::GetParticleByMaterial(material);
 	matrix_[y][x] = particle;
-	ChangeColorAt(x, y, particle->GetColor());
-	WakeUpNeighbours(x, y);
+	ChangeColorAt(x - 1, y - 1, particle->GetColor());
+	//WakeUpNeighbours(x, y);
 }
 
 
 
 Particle* SimMatrix::GetParticle(int x, int y) const {
-	if (!IsInBounds(x, y)) return border_particle_.get();
-	return matrix_[y][x];
+	return matrix_[y + 1][x + 1];
 }
 
 Material SimMatrix::GetMaterial(int x, int y) const {
-	if (!IsInBounds(x, y)) return Material::kBorderRock;
-
-	return matrix_[y][x]->GetMaterial();
+	return matrix_[y + 1][x + 1]->GetMaterial();
 }
 
 const std::vector<GLubyte>* SimMatrix::GetColorData() const {
