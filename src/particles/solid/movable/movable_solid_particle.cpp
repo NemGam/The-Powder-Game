@@ -15,7 +15,6 @@ void MovableSolidParticle::Move(SimMatrix& matrix, int x, int y) {
 		matrix.Swap(x, y, x + 1, y - 1);
 	}
 	//Stop if no possible moves
-	
 }
 
 MovableSolidParticle::MovableSolidParticle(Material element, const std::array<GLubyte, 4>& color) :
