@@ -3,12 +3,10 @@
 
 #include "brush.h"
 #include "sim_matrix.h"
-#include "window.h"
+#include "core/window.h"
 
-class Simulation
-{
+class Simulation {
 public:
-
 	Simulation(const Window* window, int width, int height);
 
 	void Start();
@@ -17,7 +15,7 @@ public:
 	SimMatrix& GetMatrix();
 
 private:
-	const Window* window_;
+
 	SimMatrix matrix_;
 	Brush brush_;
 	int width_;

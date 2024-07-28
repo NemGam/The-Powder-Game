@@ -4,13 +4,9 @@
 #include "particles/particle.h"
 
 class GasParticle :
-    public Particle
-{
-public:
-    void Move(SimMatrix& matrix, int x, int y) override;
-
+	public Particle {
 protected:
-    GasParticle(ElementType element, const std::array<GLubyte, 4>& color);
+	GasParticle(Material element, const std::array<GLubyte, 4>& color);
 };
 
 #endif // GAS_PARTICLE_H

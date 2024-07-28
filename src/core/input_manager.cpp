@@ -1,6 +1,5 @@
 #include "input_manager.h"
 
-#include <iostream>
 
 
 void InputManager::Initialize(const GLFWwindow* window) {
@@ -18,24 +17,23 @@ InputManager& InputManager::GetInstance() {
 
 
 std::tuple<double, double> InputManager::GetMousePosition() const {
-	return { mouse_x_, mouse_y_ };
+	return {mouse_x_, mouse_y_};
 }
 
 std::tuple<double, double> InputManager::GetMouseScroll() const {
-	return { mouse_scroll_x_, mouse_scroll_y_ };
+	return {mouse_scroll_x_, mouse_scroll_y_};
 }
 
 bool InputManager::IsKeyDown(int key) {
-	auto it = key_states_.find(key);
+	auto it = GetInstance().key_states_.find(key);
 
-	if (it != key_states_.end())
+	if (it != GetInstance().key_states_.end())
 		return it->second;
 
 	return false;
 }
 
 bool InputManager::IsMouseButtonDown(int button) {
-	
 	auto it = mouse_buttons_states_.find(button);
 
 	if (it != mouse_buttons_states_.end())
@@ -48,8 +46,8 @@ InputManager::InputManager() :
 	mouse_x_(0),
 	mouse_y_(0),
 	mouse_scroll_x_(0),
-	mouse_scroll_y_(0)
-{}
+	mouse_scroll_y_(0) {
+}
 
 void InputManager::MouseClickCallback(GLFWwindow* window, int button, int action, int mods) {
 	if (action == GLFW_PRESS) {
@@ -79,6 +77,3 @@ void InputManager::CursorPosCallback(GLFWwindow* window, double xpos, double ypo
 	GetInstance().mouse_x_ = xpos;
 	GetInstance().mouse_y_ = ypos;
 }
-
-
-

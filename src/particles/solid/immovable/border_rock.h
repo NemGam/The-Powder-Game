@@ -6,10 +6,12 @@
 //Indestructible particle made specifically to be on the border of the window.
 //This particle ignores any user commands and cannot be painted or erased.
 class BorderRock final :
-    public ImmovableSolidParticle
-{
+	public ImmovableSolidParticle {
 public:
-    BorderRock();
+	BorderRock();
+
+
+	[[nodiscard]] BorderRock* Clone() const override;
 };
 
 #endif // BORDER_ROCK_H

@@ -1,5 +1,9 @@
 #include "border_rock.h"
 
 BorderRock::BorderRock() :
-	ImmovableSolidParticle(ElementType::kBorderRock, { 0, 0, 0, 0 })
-{}
+	ImmovableSolidParticle(Material::kBorderRock, {0, 0, 0, 0}) {
+}
+
+BorderRock* BorderRock::Clone() const {
+	return new BorderRock(*this);
+}

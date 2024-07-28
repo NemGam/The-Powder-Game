@@ -3,10 +3,12 @@
 #include <glad/glad.h>
 
 #include "sim_matrix.h"
-#include "particles/gas/air.h"
+#include "particles.h"
+#include "particle_creator.h"
 #include "particles/solid/immovable/border_rock.h"
 
 SimMatrix::SimMatrix(int width, int height) :
+	update_flag_(true),
 	width_(width),
 	height_(height),
 	matrix_(height, std::vector<Particle*>(width))
@@ -14,14 +16,13 @@ SimMatrix::SimMatrix(int width, int height) :
 	border_particle_ = std::make_unique<BorderRock>();
 	color_data_.resize(width * height * 4);
 	std::cout << (width * height * 4) << std::endl;
-	for(int i = 0; i < height; ++i) {
+	for (int i = 0; i < height; ++i) {
 		for (int j = 0; j < width; ++j) {
 			Particle* part = new Air();
 			matrix_[i][j] = part;
 			ChangeColorAt(j, i, part->GetColor());
 		}
 	}
-	
 }
 
 SimMatrix::~SimMatrix() {
@@ -40,13 +41,20 @@ void SimMatrix::Swap(int x1, int y1, int x2, int y2) {
 }
 
 void SimMatrix::Update(int x, int y) {
+	if (matrix_[y][x]->GetUpdateFlag() == update_flag_) return;
+
 	matrix_[y][x]->Update(*this, x, y);
 }
 
-void SimMatrix::SetParticle(Particle* particle, int x, int y) {
+void SimMatrix::SetParticle(Material material, int x, int y) {
+	if (!IsInBounds(x, y)) return;
+
 	delete matrix_[y][x];
+
+	Particle* particle = ParticleCreator::GetParticleByMaterial(material);
 	matrix_[y][x] = particle;
 	ChangeColorAt(x, y, particle->GetColor());
+	
 }
 
 Particle* SimMatrix::GetParticle(int x, int y) const {
@@ -66,7 +74,11 @@ int SimMatrix::GetHeight() const {
 	return height_;
 }
 
-void SimMatrix::ChangeColorAt(int x, int y, std::array<GLubyte,4> color) {
+void SimMatrix::FlipUpdateFlag() {
+	update_flag_ = !update_flag_;
+}
+
+void SimMatrix::ChangeColorAt(int x, int y, std::array<GLubyte, 4> color) {
 	//std::memcpy(color_data_[y][x].data(), color.data(), color.size());
 	int ind = GetColorIndexFromCoordinates(x, y);
 	color_data_[ind] = color[0];

@@ -3,16 +3,16 @@
 
 #include "application.h"
 
+
 bool Application::is_running_;
 
 void Application::Start() {
-	is_running_ = true;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, false);
-	
+	is_running_ = true;
 }
 
 bool Application::IsRunning() {

@@ -2,14 +2,11 @@
 #include<iostream>
 
 
-Window::Window(int width, int height, std::string name)
-    :data_(height, 
-           std::vector<std::vector<unsigned int>>(width, std::vector<unsigned int>(3, 0))),
+Window::Window(int width, int height, const std::string& name) :
+	data_(height, std::vector(width, std::vector<unsigned int>(3, 0))),
 	width_(width), height_(height)
 {
     glfw_window_.reset(glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr));
-
-	
 }
 
 void Window::FramebufferSizeCallback(GLFWwindow* window, int width, int height) {

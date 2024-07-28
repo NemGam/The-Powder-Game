@@ -5,25 +5,28 @@
 #include <vector>
 #include <glad/glad.h>
 
+#include "particles/material.h"
+
 class Particle;
 
-class SimMatrix
-{
+class SimMatrix {
 public:
 	SimMatrix(int width, int height);
+	SimMatrix(SimMatrix&) = delete;
+	SimMatrix(SimMatrix&&) = delete;
 
 
 	~SimMatrix();
 
-	
+
 	void Swap(int x1, int y1, int x2, int y2);
 	void Update(int x, int y);
-	void SetParticle(Particle* particle, int x, int y);
+	void SetParticle(Material material, int x, int y);
 	[[nodiscard]] Particle* GetParticle(int x, int y) const;
 	[[nodiscard]] const std::vector<GLubyte>* GetColorData() const;
-	[[nodiscard]] inline int GetWidth() const;
-	[[nodiscard]] inline int GetHeight() const;
-
+	[[nodiscard]] int GetWidth() const;
+	[[nodiscard]] int GetHeight() const;
+	void FlipUpdateFlag();
 
 private:
 	//Update color data
@@ -32,7 +35,9 @@ private:
 	[[nodiscard]] int GetColorIndexFromCoordinates(int x, int y) const;
 	[[nodiscard]] bool IsInBounds(int x, int y) const;
 
-
+	//Flag that defines the "updated" flag.
+	//Allows to avoid resetting every particle's update flag at the end of the frame.
+	bool update_flag_;
 	int width_;
 	int height_;
 	std::unique_ptr<Particle> border_particle_;

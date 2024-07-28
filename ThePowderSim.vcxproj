@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\particle_creator.h" />
+    <ClInclude Include="src\core\random.h" />
+    <ClInclude Include="src\core\xoshiro128p.h" />
+    <ClInclude Include="src\particles.h" />
+    <ClInclude Include="src\particles\liquid\liquid_particle.h" />
     <ClInclude Include="src\brush.h" />
     <ClInclude Include="src\particles\solid\immovable\border_rock.h" />
     <ClInclude Include="src\particles\solid\immovable\immovable_solid_particle.h" />
@@ -29,14 +34,18 @@
     <ClInclude Include="src\particles\solid\solid_particle.h" />
     <ClInclude Include="src\particles\particle.h" />
     <ClInclude Include="src\simulation.h" />
-    <ClInclude Include="src\application.h" />
-    <ClInclude Include="src\input_manager.h" />
-    <ClInclude Include="src\window.h" />
+    <ClInclude Include="src\core\application.h" />
+    <ClInclude Include="src\core\input_manager.h" />
+    <ClInclude Include="src\core\window.h" />
     <ClInclude Include="src\sim_matrix.h" />
-    <ClInclude Include="src\particles\element_type.h" />
-    <ClInclude Include="src\utils.h" />
+    <ClInclude Include="src\particles\material.h" />
+    <ClInclude Include="src\core\utils.h" />
+    <ClInclude Include="src\particles\liquid\water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\particle_creator.cpp" />
+    <ClCompile Include="src\core\random.cpp" />
+    <ClCompile Include="src\particles\liquid\liquid_particle.cpp" />
     <ClCompile Include="src\brush.cpp" />
     <ClCompile Include="src\particles\solid\immovable\border_rock.cpp" />
     <ClCompile Include="src\particles\solid\immovable\immovable_solid_particle.cpp" />
@@ -48,12 +57,13 @@
     <ClCompile Include="src\particles\particle.cpp" />
     <ClCompile Include="src\simulation.cpp" />
     <ClCompile Include="src\sim_matrix.cpp" />
-    <ClCompile Include="src\application.cpp" />
-    <ClCompile Include="src\input_manager.cpp" />
+    <ClCompile Include="src\core\application.cpp" />
+    <ClCompile Include="src\core\input_manager.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\window.cpp" />
-    <ClCompile Include="src\utils.cpp" />
+    <ClCompile Include="src\core\window.cpp" />
+    <ClCompile Include="src\core\utils.cpp" />
+    <ClCompile Include="src\particles\liquid\water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />

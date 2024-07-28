@@ -4,14 +4,13 @@
 #include "particles/solid/movable/movable_solid_particle.h"
 
 class Sand final :
-    public MovableSolidParticle
+	public MovableSolidParticle
 {
 public:
 	Sand();
 
-
+	[[nodiscard]] Sand* Clone() const override;
 	void Move(SimMatrix& matrix, int x, int y) override;
-
 };
 
 #endif // SAND_PARTICLE_H

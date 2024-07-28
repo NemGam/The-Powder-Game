@@ -3,29 +3,35 @@
 
 #include <array>
 
-#include "element_type.h"
+#include "material.h"
 #include "sim_matrix.h"
 
-class Particle
-{
+class Particle {
 public:
 	Particle() = default;
+	
 
 	virtual ~Particle() = default;
 
-	ElementType GetElement() const;
 
-	std::array<GLubyte, 4>& GetColor();
-
+	[[nodiscard]] Material GetElement() const;
+	[[nodiscard]] const std::array<GLubyte, 4>& GetColor() const;
 	void Update(SimMatrix& matrix, int x, int y);
+	virtual void Move(SimMatrix& matrix, int x, int y) = 0;
+	[[nodiscard]] bool GetUpdateFlag() const;
 
-	void virtual Move(SimMatrix& matrix, int x, int y) = 0;
 
+	friend class ParticleCreator;
 
 protected:
-	Particle(ElementType element, const std::array<GLubyte, 4>& color);
+	Particle(Material element, const std::array<GLubyte, 4>& color);
 
-	ElementType element_;
+
+	[[nodiscard]] virtual Particle* Clone() const = 0;
+
+
+	bool update_flag_;
+	Material element_;
 	std::array<GLubyte, 4> color_;
 };
 

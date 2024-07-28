@@ -1,10 +1,5 @@
 #include "particles/gas/gas_particle.h"
 
-void GasParticle::Move(SimMatrix& matrix, int x, int y) {
-	return;
+GasParticle::GasParticle(Material element, const std::array<GLubyte, 4>& color)
+	: Particle(element, color) {
 }
-
-GasParticle::GasParticle(ElementType element, const std::array<GLubyte, 4>& color)
-	: Particle(element, color)
-{}
-

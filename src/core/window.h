@@ -25,10 +25,11 @@ public:
 	GLFWwindow& GetNativeWindow();
 	void Render();
 	void SetTitle(const std::string& new_name);
-	inline int GetWidth() const;
-	inline int GetHeight() const;
+	[[nodiscard]] int GetWidth() const;
+	[[nodiscard]] int GetHeight() const;
+
 private:
-	Window(int width, int height, std::string name);
+	Window(int width, int height, const std::string& name);
 
 
 	static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
