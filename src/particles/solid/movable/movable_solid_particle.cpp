@@ -1,13 +1,15 @@
 #include "movable_solid_particle.h"
+#include "globals.h"
+
 
 void MovableSolidParticle::Move(SimMatrix& matrix, int x, int y) {
 
 	if (matrix.GetMaterial(x, y - 1) == Material::kAir || matrix.GetMaterial(x, y - 1) == Material::kWater) {
-		for (int i = 1; i < 4; i++) {
+		for (int i = 2; i < kGravity; i++) {
 			if (matrix.GetMaterial(x, y - i) == Material::kAir || matrix.GetMaterial(x, y - i) == Material::kWater) 
 				continue;
 
-			matrix.Swap(x, y, x, y - i + 1);
+			matrix.Swap(x, y, x, y - (i - 1));
 			return;
 		}
 

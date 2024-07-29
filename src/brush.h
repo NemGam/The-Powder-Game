@@ -1,8 +1,6 @@
 #ifndef BRUSH_H
 #define BRUSH_H
 
-#include <memory>
-
 #include "sim_matrix.h"
 #include "core/window.h"
 #include "particles/material.h"
@@ -18,7 +16,7 @@ public:
 private:
 	void CreateParticles(double x, double y) const;
 	void EraseParticles(double x, double y) const;
-	void Fill(Material material, double x, double y, float chance = 1.0f) const;
+	void Fill(Material material, double x, double y, bool force = false) const;
 
 	Material current_material_;
 	SimMatrix* matrix_;

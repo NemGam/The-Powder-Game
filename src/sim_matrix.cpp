@@ -26,10 +26,10 @@ SimMatrix::SimMatrix(int width, int height) :
 
 			//Creating a border
 			if (i == 0 || j == 0 || j == width + 1 || i == height + 1) {
-				matrix_[i][j] = ParticleCreator::GetParticleByMaterial(Material::kBorderRock);
+				matrix_[i][j] = ParticleCreator::GetParticleByMaterial(Material::kBorderRock, false);
 				continue;
 			}
-			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir);
+			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir, false);
 			matrix_[i][j] = part;
 			ChangeColorAt(j - 1, i - 1, part->GetColor()); 
 		}

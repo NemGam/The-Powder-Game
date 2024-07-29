@@ -11,7 +11,7 @@ Particle* ParticleCreator::GetParticleByMaterial(Material material, bool randomi
 	if (randomize_color) {
 		auto color = particle->GetColor();
 		for (int i = 0; i < 3; i++)
-			color[i] = std::clamp(color[i] + static_cast<int>(random::RandomUnit() * 10), 0, 255);
+			color[i] = std::clamp(color[i] + static_cast<int>(random::RandomUnit() * 15), 0, 255);
 		particle->SetColor(color);
 	}
 	return particle;
@@ -22,7 +22,7 @@ ParticleCreator::ParticleCreator() {
 		{Material::kAir, new Air()},
 		{Material::kBorderRock, new BorderRock()},
 		{Material::kSand, new Sand()},
-		//{Material::kStone, new Stone()},
+		{Material::kStone, new Stone()},
 		{Material::kWater, new Water()},
 	};
 }

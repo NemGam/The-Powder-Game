@@ -3,7 +3,6 @@
 #include "brush.h"
 #include "core/input_manager.h"
 #include "core/utils.h"
-#include "core/random.h"
 
 Brush::Brush(const Window* window, SimMatrix* matrix) :
 	current_material_(Material::kSand),
@@ -18,14 +17,14 @@ void Brush::SetMaterial(Material material) {
 }
 
 void Brush::CreateParticles(double x, double y) const {
-	Fill(current_material_, x, y, 0.5f);
+	Fill(current_material_, x, y);
 }
 
 void Brush::EraseParticles(double x, double y) const {
-	Fill(Material::kAir, x, y);
+	Fill(Material::kAir, x, y, true);
 }
 
-void Brush::Fill(Material material, double x, double y, float chance) const {
+void Brush::Fill(Material material, double x, double y, bool force) const {
 	auto [x_coord, y_coord] = utils::FromWindowToMatrix(window_, matrix_, x, y);
 	int minI = std::max(x_coord - radius_, 0);
 	int maxI = std::min(x_coord + radius_, matrix_->GetWidth() - 1);
@@ -34,8 +33,10 @@ void Brush::Fill(Material material, double x, double y, float chance) const {
 
 	for (int i = minI; i <= maxI; i++) {
 		for (int j = minJ; j <= maxJ; j++) {
-			if (random::Random() <= chance)
+			if (force || matrix_->GetMaterial(i, j) == Material::kAir) {
 				matrix_->SetParticle(material, i, j);
+			}
+			//if (random::Random() <= chance)
 		}
 	}
 }
@@ -56,5 +57,9 @@ void Brush::Update() {
 
 	if (InputManager::IsKeyDown(GLFW_KEY_2)) {
 		SetMaterial(Material::kWater);
+	}
+
+	if (InputManager::IsKeyDown(GLFW_KEY_3)) {
+		SetMaterial(Material::kStone);
 	}
 }

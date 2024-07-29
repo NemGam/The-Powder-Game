@@ -29,6 +29,8 @@
     <ClInclude Include="src\core\random.h" />
     <ClInclude Include="src\core\xoshiro128p.h" />
     <ClInclude Include="src\particle_creator.h" />
+    <ClInclude Include="src\globals.h" />
+    <ClInclude Include="src\particles\solid\immovable\stone.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\input_manager.cpp" />
@@ -52,6 +54,7 @@
     <ClCompile Include="src\particles\liquid\water.cpp" />
     <ClCompile Include="src\core\random.cpp" />
     <ClCompile Include="src\particle_creator.cpp" />
+    <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />

@@ -12,10 +12,7 @@ const std::array<GLubyte, 4>& Particle::GetColor() const{
 }
 
 void Particle::SetColor(const std::array<GLubyte, 4>& color) {
-	color_[0] = color[0];
-	color_[1] = color[1];
-	color_[2] = color[2];
-	color_[3] = color[3];
+	std::memcpy(color_.data(), color.data(), sizeof(GLubyte) * color.size());
 }
 
 

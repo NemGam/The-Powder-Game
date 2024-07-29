@@ -108,8 +108,9 @@ void ProcessInput() {
 }
 
 
-constexpr int textureWidth = 350;
-constexpr int textureHeight = 350;
+constexpr int kTextureWidth = 350;
+constexpr int kTextureHeight = 350;
+
 
 int main() {
 	//Start everything up
@@ -174,10 +175,10 @@ int main() {
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	Simulation simulation(window.get(), textureWidth, textureHeight);
+	Simulation simulation(window.get(), kTextureWidth, kTextureHeight);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth,
-	             textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, kTextureWidth,
+	             kTextureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE,
 	             simulation.GetMatrix().GetColorData()->data());
 
 	glUseProgram(shader);
@@ -214,7 +215,7 @@ int main() {
 			glfwSwapBuffers(&window->GetNativeWindow());
 
 
-			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE,
+			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, kTextureWidth, kTextureHeight, GL_RGBA, GL_UNSIGNED_BYTE,
 			                simulation.GetMatrix().GetColorData()->data());
 
 			last_render_frame = currentFrame;

@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\particles\solid\immovable\stone.h" />
+    <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\particle_creator.h" />
     <ClInclude Include="src\core\random.h" />
     <ClInclude Include="src\core\xoshiro128p.h" />
@@ -43,6 +45,7 @@
     <ClInclude Include="src\particles\liquid\water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
     <ClCompile Include="src\particle_creator.cpp" />
     <ClCompile Include="src\core\random.cpp" />
     <ClCompile Include="src\particles\liquid\liquid_particle.cpp" />
