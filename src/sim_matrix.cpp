@@ -29,7 +29,7 @@ SimMatrix::SimMatrix(int width, int height) :
 				matrix_[i][j] = ParticleCreator::GetParticleByMaterial(Material::kBorderRock);
 				continue;
 			}
-			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kSand);
+			Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir);
 			matrix_[i][j] = part;
 			ChangeColorAt(j - 1, i - 1, part->GetColor()); 
 		}

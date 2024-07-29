@@ -108,8 +108,8 @@ void ProcessInput() {
 }
 
 
-constexpr int textureWidth = 400;
-constexpr int textureHeight = 400;
+constexpr int textureWidth = 350;
+constexpr int textureHeight = 350;
 
 int main() {
 	//Start everything up

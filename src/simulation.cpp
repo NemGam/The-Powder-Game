@@ -15,7 +15,7 @@ void Simulation::Start() {
 void Simulation::Update(float dt) {
 	brush_.Update();
 	bool dir = false;
-	for (int i = 0; i < height_; ++i) {
+	for (int i = height_ - 1; i >= 0; --i) {
 		if (dir) {
 			for (int j = 0; j < width_; ++j) {
 				matrix_.Update(j, i);
