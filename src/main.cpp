@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 
+#include "shader.h"
 #include "core/application.h"
 #include "core/window.h"
 #include "core/input_manager.h"
@@ -15,94 +16,17 @@
 constexpr int kWindowHeight = 640;
 constexpr int kWindowWidth = 820;
 
-struct ShaderSource {
-	std::string vertex;
-	std::string fragment;
-};
-
-static ShaderSource ParseShader(const std::string& filepath) {
-	enum class ShaderType {
-		kNone = -1, kVertex = 0, kFragment = 1
-	};
-
-
-	std::ifstream stream(filepath);
-	if (!stream) {
-		std::cerr << "Failed to open shader at " << filepath << "\n";
-		return {"", ""};
-	}
-
-	ShaderType type = ShaderType::kNone;
-
-	std::string line;
-	std::stringstream ss[2];
-	while (std::getline(stream, line)) {
-		if (line.find("#shader") != std::string::npos) {
-			if (line.find("vertex") != std::string::npos) {
-				type = ShaderType::kVertex;
-			}
-			else if (line.find("fragment") != std::string::npos) {
-				type = ShaderType::kFragment;
-			}
-		}
-		else {
-			ss[static_cast<int>(type)] << line << "\n";
-		}
-	}
-
-	return {ss[0].str(), ss[1].str()};
-}
-
-static unsigned int CompileShader(unsigned int type, const std::string& source) {
-	unsigned int id = glCreateShader(type);
-	const char* src = source.c_str();
-	glShaderSource(id, 1, &src, nullptr);
-	glCompileShader(id);
-
-	int result;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-
-	if (!result) {
-		int len;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &len);
-		char* message = static_cast<char*>(alloca(len * sizeof(char)));
-		glGetShaderInfoLog(id, len, &len, message);
-		std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader!" << "\n";
-		std::cout << message << "\n";
-		glDeleteShader(id);
-		return 0;
-	}
-
-	return id;
-}
-
-static unsigned int CreateShader(const std::string vertexShader, const std::string& fragmentShader) {
-	unsigned int program = glCreateProgram();
-	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
-
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
-	glLinkProgram(program);
-	glValidateProgram(program);
-
-	glDeleteShader(vs);
-	glDeleteShader(fs);
-
-	return program;
-}
-
 
 void ProcessInput() {
-	if (InputManager::GetInstance().IsKeyDown(GLFW_KEY_ESCAPE)) {
+	if (InputManager::IsKeyDown(GLFW_KEY_ESCAPE)) {
 		Application::Quit();
 	}
 
-	if (InputManager::GetInstance().IsKeyDown(GLFW_KEY_F1)) {
+	if (InputManager::IsKeyDown(GLFW_KEY_F1)) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 
-	if (InputManager::GetInstance().IsKeyDown(GLFW_KEY_F2)) {
+	if (InputManager::IsKeyDown(GLFW_KEY_F2)) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 }
@@ -156,10 +80,8 @@ int main() {
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float))); //texPos
 	glEnableVertexAttribArray(1);
 
-
-	ShaderSource source = ParseShader("res/shaders/basic.shader");
-
-	unsigned int shader = CreateShader(source.vertex, source.fragment);
+	//Shader
+	Shader main_shader = Shader("res/shaders/basic.shader");
 
 	//CREATING TEXTURE
 
@@ -181,7 +103,7 @@ int main() {
 	             kTextureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE,
 	             simulation.GetMatrix().GetColorData()->data());
 
-	glUseProgram(shader);
+	
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 	simulation.Start();
@@ -226,7 +148,7 @@ int main() {
 	glDeleteVertexArrays(1, &vao);
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
-	glDeleteProgram(shader);
+	
 	glfwTerminate();
 	return 0;
 }

@@ -31,6 +31,8 @@
     <ClInclude Include="src\particle_creator.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\particles\solid\immovable\stone.h" />
+    <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\shader_source.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\input_manager.cpp" />
@@ -55,6 +57,7 @@
     <ClCompile Include="src\core\random.cpp" />
     <ClCompile Include="src\particle_creator.cpp" />
     <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
+    <ClCompile Include="src\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
