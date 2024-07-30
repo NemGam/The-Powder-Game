@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\rendering\mesh.h" />
+    <ClInclude Include="src\rendering\texture.h" />
+    <ClInclude Include="src\rendering\vertex.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\particles\solid\immovable\stone.h" />
     <ClInclude Include="src\globals.h" />
@@ -40,13 +43,16 @@
     <ClInclude Include="src\simulation.h" />
     <ClInclude Include="src\core\application.h" />
     <ClInclude Include="src\core\input_manager.h" />
-    <ClInclude Include="src\core\window.h" />
+    <ClInclude Include="src\rendering\window.h" />
     <ClInclude Include="src\sim_matrix.h" />
     <ClInclude Include="src\particles\material.h" />
     <ClInclude Include="src\core\utils.h" />
     <ClInclude Include="src\particles\liquid\water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\rendering\mesh.cpp" />
+    <ClCompile Include="src\rendering\texture.cpp" />
+    <ClCompile Include="src\rendering\vertex.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
     <ClCompile Include="src\particle_creator.cpp" />
@@ -67,7 +73,7 @@
     <ClCompile Include="src\core\input_manager.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\core\window.cpp" />
+    <ClCompile Include="src\rendering\window.cpp" />
     <ClCompile Include="src\core\utils.cpp" />
     <ClCompile Include="src\particles\liquid\water.cpp" />
   </ItemGroup>

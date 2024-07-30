@@ -82,11 +82,15 @@ ShaderSource Shader::ParseShader(const std::string& filepath) {
 Shader::Shader(const std::string& filepath) {
 	ShaderSource source = ParseShader(filepath);
 
-	unsigned int shader = CreateShader(source.vertex, source.fragment);
+	id_ = CreateShader(source.vertex, source.fragment);
 
-	glUseProgram(shader);
+	glUseProgram(id_);
 
-	glDeleteProgram(shader);
+	glDeleteProgram(id_);
 
+}
+
+unsigned int Shader::GetId() const {
+	return id_;
 }
 

@@ -2,7 +2,6 @@
 #define WINDOW_H
 #include <memory>
 #include <string>
-#include <glad/glad.h>
 #include <vector>
 #include <GLFW/glfw3.h>
 
@@ -21,8 +20,8 @@ public:
 	~Window();
 
 
-	GLFWwindow& GetNativeWindow();
-	void Render();
+	GLFWwindow& GetNativeWindow() const;
+	void Update();
 	void SetTitle(const std::string& new_name);
 	[[nodiscard]] int GetWidth() const;
 	[[nodiscard]] int GetHeight() const;
@@ -32,7 +31,6 @@ private:
 
 
 	static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
-
 
 	std::unique_ptr<GLFWwindow, DestroyGLFWWin> glfw_window_;
 	std::vector<std::vector<std::vector<unsigned int>>> data_;

@@ -18,7 +18,7 @@
     <ClInclude Include="src\particles\solid\movable\sand.h" />
     <ClInclude Include="src\particles\gas\air.h" />
     <ClInclude Include="src\particles\gas\gas_particle.h" />
-    <ClInclude Include="src\core\window.h" />
+    <ClInclude Include="src\rendering\window.h" />
     <ClInclude Include="src\particles\solid\immovable\immovable_solid_particle.h" />
     <ClInclude Include="src\particles\solid\immovable\border_rock.h" />
     <ClInclude Include="src\brush.h" />
@@ -33,12 +33,15 @@
     <ClInclude Include="src\particles\solid\immovable\stone.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\shader_source.h" />
+    <ClInclude Include="src\rendering\mesh.h" />
+    <ClInclude Include="src\rendering\vertex.h" />
+    <ClInclude Include="src\rendering\texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\input_manager.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\core\window.cpp" />
+    <ClCompile Include="src\rendering\window.cpp" />
     <ClCompile Include="src\core\application.cpp" />
     <ClCompile Include="src\sim_matrix.cpp" />
     <ClCompile Include="src\simulation.cpp" />
@@ -58,6 +61,9 @@
     <ClCompile Include="src\particle_creator.cpp" />
     <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\rendering\mesh.cpp" />
+    <ClCompile Include="src\rendering\texture.cpp" />
+    <ClCompile Include="src\rendering\vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />

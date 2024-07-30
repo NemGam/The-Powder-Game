@@ -3,7 +3,7 @@
 
 #include "brush.h"
 #include "sim_matrix.h"
-#include "core/window.h"
+#include "rendering/window.h"
 
 class Simulation {
 public:

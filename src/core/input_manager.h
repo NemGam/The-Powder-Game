@@ -3,7 +3,7 @@
 
 #include <unordered_map>
 
-#include "core/window.h"
+#include "rendering/window.h"
 
 class InputManager {
 public:
@@ -15,8 +15,8 @@ public:
 
 
 	static InputManager& GetInstance();
-	std::tuple<double, double> GetMousePosition() const;
-	std::tuple<double, double> GetMouseScroll() const;
+	[[nodiscard]] std::tuple<double, double> GetMousePosition() const;
+	[[nodiscard]] std::tuple<double, double> GetMouseScroll() const;
 	static bool IsKeyDown(int key);
 	bool IsMouseButtonDown(int button);
 

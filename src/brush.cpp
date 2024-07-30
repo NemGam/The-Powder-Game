@@ -11,8 +11,13 @@ Brush::Brush(const Window* window, SimMatrix* matrix) :
 	radius_(5)
 {}
 
+void Brush::SetRadius(int radius) {
+	if (radius_ <= 0) return;
+
+	radius_ = radius;
+}
+
 void Brush::SetMaterial(Material material) {
-	//std::cout << "Chosen particle is " << static_cast<int>(particle->GetMaterial()) << '\n';
 	current_material_ = material;
 }
 
@@ -24,7 +29,7 @@ void Brush::EraseParticles(double x, double y) const {
 	Fill(Material::kAir, x, y, true);
 }
 
-void Brush::Fill(Material material, double x, double y, bool force) const {
+void Brush::Fill(Material material, double x, double y, bool force_replace) const {
 	auto [x_coord, y_coord] = utils::FromWindowToMatrix(window_, matrix_, x, y);
 	int minI = std::max(x_coord - radius_, 0);
 	int maxI = std::min(x_coord + radius_, matrix_->GetWidth() - 1);
@@ -33,7 +38,7 @@ void Brush::Fill(Material material, double x, double y, bool force) const {
 
 	for (int i = minI; i <= maxI; i++) {
 		for (int j = minJ; j <= maxJ; j++) {
-			if (force || matrix_->GetMaterial(i, j) == Material::kAir) {
+			if (force_replace || matrix_->GetMaterial(i, j) == Material::kAir) {
 				matrix_->SetParticle(material, i, j);
 			}
 			//if (random::Random() <= chance)

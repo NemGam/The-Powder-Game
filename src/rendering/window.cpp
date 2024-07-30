@@ -1,5 +1,10 @@
+#include <iostream>
+#include <glad/glad.h>
+
 #include"window.h"
-#include<iostream>
+
+#include "core/application.h"
+#include "core/input_manager.h"
 
 
 Window::Window(int width, int height, const std::string& name) :
@@ -39,9 +44,9 @@ Window* Window::Create(int width, int height, const std::string& name) {
         std::cerr << "Failed to create GLFW window\n";
         return nullptr;
     }
-    //glfwSwapInterval(1);
+
     glfwMakeContextCurrent(window->glfw_window_.get());
-    //glfwSwapInterval(1);
+
 
     if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {
         std::cerr << "Failed to initialize GLAD\n";
@@ -54,16 +59,22 @@ Window* Window::Create(int width, int height, const std::string& name) {
     return window;
 }
 
-GLFWwindow& Window::GetNativeWindow() {
+GLFWwindow& Window::GetNativeWindow() const {
     return *glfw_window_;
 }
 
+void Window::Update() {
+    if (InputManager::IsKeyDown(GLFW_KEY_ESCAPE)) {
+        Application::Quit();
+    }
 
-void Window::Render() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    
+    if (InputManager::IsKeyDown(GLFW_KEY_F1)) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
 
-    glfwSwapBuffers(glfw_window_.get());
+    if (InputManager::IsKeyDown(GLFW_KEY_F2)) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
 }
 
 Window::~Window() {
