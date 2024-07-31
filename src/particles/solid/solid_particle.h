@@ -3,14 +3,16 @@
 
 #include "particles/particle.h"
 
-class SolidParticle :
-	public Particle
+namespace powder_sim
 {
-public:
-	void Move(SimMatrix& matrix, int x, int y) override;
+	class SolidParticle :
+		public Particle
+	{
+	public:
+		void Move(SimMatrix& matrix, int x, int y) override;
 
-protected:
-	SolidParticle(Material element, const std::array<GLubyte, 4>& color);
-};
-
+	protected:
+		SolidParticle(Material element, const std::array<GLubyte, 4>& color);
+	};
+}
 #endif // SOLID_PARTICLE_H

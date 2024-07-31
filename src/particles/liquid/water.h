@@ -3,14 +3,16 @@
 
 #include "particles/liquid/liquid_particle.h"
 
-class Water final:
-    public LiquidParticle
+namespace powder_sim
 {
-public:
-    Water();
+    class Water final :
+        public LiquidParticle
+    {
+    public:
+        Water();
 
 
-    Water* Clone() const override;
-};
-
+        Water* Clone() const override;
+    };
+}
 #endif // WATER_H

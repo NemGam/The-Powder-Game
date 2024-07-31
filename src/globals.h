@@ -1,6 +1,8 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-constexpr int kGravity = 9;
-
+namespace powder_sim
+{
+	constexpr int kGravity = 9;
+}
 #endif // GLOBALS_H

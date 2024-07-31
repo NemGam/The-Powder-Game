@@ -22,7 +22,7 @@
     <ClInclude Include="src\rendering\mesh.h" />
     <ClInclude Include="src\rendering\texture.h" />
     <ClInclude Include="src\rendering\vertex.h" />
-    <ClInclude Include="src\shader.h" />
+    <ClInclude Include="src\rendering\shader.h" />
     <ClInclude Include="src\particles\solid\immovable\stone.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\particle_creator.h" />
@@ -39,7 +39,7 @@
     <ClInclude Include="src\particles\solid\movable\movable_solid_particle.h" />
     <ClInclude Include="src\particles\solid\solid_particle.h" />
     <ClInclude Include="src\particles\particle.h" />
-    <ClInclude Include="src\shader_source.h" />
+    <ClInclude Include="src\rendering\shader_source.h" />
     <ClInclude Include="src\simulation.h" />
     <ClInclude Include="src\core\application.h" />
     <ClInclude Include="src\core\input_manager.h" />
@@ -53,7 +53,7 @@
     <ClCompile Include="src\rendering\mesh.cpp" />
     <ClCompile Include="src\rendering\texture.cpp" />
     <ClCompile Include="src\rendering\vertex.cpp" />
-    <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\rendering\shader.cpp" />
     <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
     <ClCompile Include="src\particle_creator.cpp" />
     <ClCompile Include="src\core\random.cpp" />
@@ -134,11 +134,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderSim\src;D:\Libraries\includes;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderSim\src;C:\Users\Vladislav\source\repos\ThePowderSim\include;D:\Libraries\includes;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Libraries\glfw-3.4\build\src\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderSim\src;D:\Libraries\includes;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vladislav\source\repos\ThePowderSim\src;C:\Users\Vladislav\source\repos\ThePowderSim\include;D:\Libraries\includes;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Libraries\glfw-3.4\build\src\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

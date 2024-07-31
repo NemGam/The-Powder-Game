@@ -3,10 +3,13 @@
 
 #include "particles/particle.h"
 
-class GasParticle :
-	public Particle {
-protected:
-	GasParticle(Material element, const std::array<GLubyte, 4>& color);
-};
+namespace powder_sim
+{
+	class GasParticle :
+		public Particle {
+	protected:
+		GasParticle(Material element, const std::array<GLubyte, 4>& color);
+	};
+}
 
 #endif // GAS_PARTICLE_H

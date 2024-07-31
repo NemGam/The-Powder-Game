@@ -3,15 +3,18 @@
 
 #include "particles/gas/gas_particle.h"
 
-class Air final :
-	public GasParticle
+namespace powder_sim
 {
-public:
-	Air();
+	class Air final :
+		public GasParticle
+	{
+	public:
+		Air();
 
-	Air* Clone() const override;
+		Air* Clone() const override;
 
-	void Move(SimMatrix& matrix, int x, int y) override;
-};
+		void Move(SimMatrix& matrix, int x, int y) override;
+	};
+}
 
 #endif // AIR_H

@@ -5,14 +5,17 @@
 
 #include "xoshiro128p.h"
 
-namespace random {
-	float Random() {
-		uint32_t num = next();
-		
-		return static_cast<float>(num) / static_cast<float>(kUintMax);
-	}
+namespace powder_sim
+{
+	namespace random {
+		float Random() {
+			uint32_t num = next();
 
-	float RandomUnit() {
-		return Random() * 2 - 1;
+			return static_cast<float>(num) / static_cast<float>(kUintMax);
+		}
+
+		float RandomUnit() {
+			return Random() * 2 - 1;
+		}
 	}
 }

@@ -3,7 +3,7 @@
 #include <cstdint>
 
 
-namespace random {
+namespace powder_sim::random {
 	constexpr uint32_t kUintMax = static_cast<uint32_t>(-1);
 
 	//Generates a random number from 0 to 1 inclusive.

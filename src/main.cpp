@@ -5,20 +5,22 @@
 #include <sstream>
 #include <iostream>
 
-#include "shader.h"
-#include "core/application.h"
+#include "rendering/shader.h"
 #include "rendering/window.h"
+#include "rendering/mesh.h"
+
+#include "core/application.h"
 #include "core/input_manager.h"
 
 #include "simulation.h"
-#include "rendering/mesh.h"
 
 constexpr int kWindowHeight = 640;
 constexpr int kWindowWidth = 820;
 
-constexpr int kTextureWidth = 350;
-constexpr int kTextureHeight = 350;
+constexpr int kGridWidth = 350;
+constexpr int kGridHeight = 350;
 
+using namespace powder_sim;
 
 int main() {
 	//Start everything up
@@ -42,9 +44,9 @@ int main() {
 		2, 3, 0
 	};
 
-	Simulation simulation(window.get(), kTextureWidth, kTextureHeight);
+	Simulation simulation(window.get(), kGridWidth, kGridHeight);
 
-	Texture main_tex(kTextureWidth, kTextureHeight);
+	Texture main_tex(kGridWidth, kGridHeight);
 	main_tex.SetDynamicData(simulation.GetMatrix().GetColorData());
 	
 	Mesh screen_quad(vertices, indices, main_tex);
@@ -52,17 +54,12 @@ int main() {
 	//Shader
 	Shader main_shader("res/shaders/basic.shader");
 
-
-	
-
-	
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-
 	simulation.Start();
 
 	float last_frame = 0.0f;
 	float last_render_frame = 0.0f;
 
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	//Actual loop
 	while (Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
 		float current_frame = static_cast<float>(glfwGetTime());

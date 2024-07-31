@@ -6,26 +6,28 @@
 #include "particles/material.h"
 #include "particles/particle.h"
 
-class ParticleCreator
+namespace powder_sim
 {
-public:
-	ParticleCreator(const ParticleCreator&) = delete;
-	ParticleCreator& operator=(const ParticleCreator&) = delete;
+	class ParticleCreator
+	{
+	public:
+		ParticleCreator(const ParticleCreator&) = delete;
+		ParticleCreator& operator=(const ParticleCreator&) = delete;
 
 
-	//Returns copy of the particle with the given element
-	static Particle* GetParticleByMaterial(Material material, bool randomize_color = true);
+		//Returns copy of the particle with the given element
+		static Particle* GetParticleByMaterial(Material material, bool randomize_color = true);
 
-private:
-	ParticleCreator();
+	private:
+		ParticleCreator();
 
-	~ParticleCreator();
-
-
-	static ParticleCreator& GetInstance();
+		~ParticleCreator();
 
 
-	std::unordered_map<Material, Particle*> particles_;
-};
+		static ParticleCreator& GetInstance();
 
+
+		std::unordered_map<Material, Particle*> particles_;
+	};
+}
 #endif // PARTICLE_CREATOR_H

@@ -3,14 +3,16 @@
 
 #include "particles/solid/immovable/immovable_solid_particle.h"
 
-class Stone :
-    public ImmovableSolidParticle
+namespace powder_sim
 {
-public:
-    Stone();
+    class Stone :
+        public ImmovableSolidParticle
+    {
+    public:
+        Stone();
 
 
-    Stone* Clone() const override;
-};
-
+        Stone* Clone() const override;
+    };
+}
 #endif // ROCK_H

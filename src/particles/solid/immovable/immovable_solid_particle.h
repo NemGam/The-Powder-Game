@@ -3,13 +3,15 @@
 
 #include "particles/solid/solid_particle.h"
 
-class ImmovableSolidParticle :
-	public SolidParticle {
-public:
-	void Move(SimMatrix& matrix, int x, int y) final;
+namespace powder_sim
+{
+	class ImmovableSolidParticle :
+		public SolidParticle {
+	public:
+		void Move(SimMatrix& matrix, int x, int y) final;
 
-protected:
-	ImmovableSolidParticle(Material element, const std::array<GLubyte, 4>& color);
-};
-
+	protected:
+		ImmovableSolidParticle(Material element, const std::array<GLubyte, 4>& color);
+	};
+}
 #endif // IMMOVABLE_SOLID_PARTICLE_H

@@ -31,8 +31,8 @@
     <ClInclude Include="src\particle_creator.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\particles\solid\immovable\stone.h" />
-    <ClInclude Include="src\shader.h" />
-    <ClInclude Include="src\shader_source.h" />
+    <ClInclude Include="src\rendering\shader.h" />
+    <ClInclude Include="src\rendering\shader_source.h" />
     <ClInclude Include="src\rendering\mesh.h" />
     <ClInclude Include="src\rendering\vertex.h" />
     <ClInclude Include="src\rendering\texture.h" />
@@ -60,7 +60,7 @@
     <ClCompile Include="src\core\random.cpp" />
     <ClCompile Include="src\particle_creator.cpp" />
     <ClCompile Include="src\particles\solid\immovable\stone.cpp" />
-    <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\rendering\shader.cpp" />
     <ClCompile Include="src\rendering\mesh.cpp" />
     <ClCompile Include="src\rendering\texture.cpp" />
     <ClCompile Include="src\rendering\vertex.cpp" />

@@ -3,13 +3,15 @@
 
 #include "particles/solid/movable/movable_solid_particle.h"
 
-class Sand final :
-	public MovableSolidParticle
+namespace powder_sim
 {
-public:
-	Sand();
+	class Sand final :
+		public MovableSolidParticle
+	{
+	public:
+		Sand();
 
-	[[nodiscard]] Sand* Clone() const override;
-};
-
+		[[nodiscard]] Sand* Clone() const override;
+	};
+}
 #endif // SAND_PARTICLE_H
