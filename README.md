@@ -5,8 +5,8 @@ High performant falling sand simulation made with OpenGL and C++.
 	'1' - select Sand.
  	'2' - select Water.
   	'3' - select Stone.
-   	Left Mouse Button - place selected element.
-    	Right Mouse Button - erase elements.
+   	 Left Mouse Button - place selected element.
+     Right Mouse Button - erase elements.
 
 # Windows
 The build is not available at the moment.
