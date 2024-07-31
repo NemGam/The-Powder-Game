@@ -11,7 +11,7 @@ High performant falling sand simulation made with OpenGL and C++.
 # Windows
 The build is not available at the moment.
 <!--Windows build can be downloaded [here](https://github.com/NemGam/Snake/releases/download/v1.2.0/Pong.zip). Just unpack to any folder and run snake.exe. -->
-# Getting Started (Linux)
+# Linux
 ## Requirements
 - CMake (version 3.13 or higher recommended)
 - C++ Compiler: Compatible with C++17 standard
