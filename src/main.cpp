@@ -14,11 +14,11 @@
 
 #include "simulation.h"
 
-constexpr int kWindowHeight = 640;
-constexpr int kWindowWidth = 820;
+constexpr int kWindowHeight = 820;
+constexpr int kWindowWidth = 1280;
 
-constexpr int kGridWidth = 350;
-constexpr int kGridHeight = 350;
+constexpr int kGridWidth = 400;
+constexpr int kGridHeight = 400;
 
 using namespace powder_sim;
 
@@ -50,8 +50,8 @@ int main() {
 			},
 			//Indices
 			{ 
-			  0, 1, 2,
-			  2, 3, 0
+			  2, 1, 0,
+			  0, 3, 2
 			},
 			//Texture
 			main_tex

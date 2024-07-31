@@ -3,6 +3,6 @@
 
 namespace powder_sim
 {
-	constexpr int kGravity = 9;
+	constexpr int kGravity = 6;
 }
 #endif // GLOBALS_H

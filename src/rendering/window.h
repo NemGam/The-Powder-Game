@@ -8,7 +8,7 @@
 namespace powder_sim
 {
 	struct DestroyGLFWWin {
-		void operator()(GLFWwindow* ptr) {
+		void operator()(GLFWwindow* ptr) const {
 			glfwDestroyWindow(ptr);
 		}
 	};
@@ -19,14 +19,19 @@ namespace powder_sim
 		static Window* Create(int width, int height);
 
 
+		Window(const Window&) = delete;
+		Window(Window&&) = delete;
+		Window& operator=(const Window&) = delete;
+		Window&& operator=(Window&&) = delete;
+
 		~Window();
 
 
-		GLFWwindow& GetNativeWindow() const;
-		void Update();
-		void SetTitle(const std::string& new_name);
+		[[nodiscard]] GLFWwindow& GetNativeWindow() const;
 		[[nodiscard]] int GetWidth() const;
 		[[nodiscard]] int GetHeight() const;
+		void Update();
+		void SetTitle(const std::string& new_name);
 
 	private:
 		Window(int width, int height, const std::string& name);
