@@ -1,5 +1,5 @@
 # <ins>The Powder Sim</ins>
-High performant falling sand simulation
+High performant falling sand simulation made with OpenGL and C++.
 
 # Windows
 The build is not available at the moment.
