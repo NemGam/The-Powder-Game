@@ -1,6 +1,13 @@
 # <ins>The Powder Sim</ins>
 High performant falling sand simulation made with OpenGL and C++.
 
+# Controls:
+	'1' - select Sand.
+ 	'2' - select Water.
+  	'3' - select Stone.
+   	Left Mouse Button - place selected element.
+    	Right Mouse Button - erase elements.
+
 # Windows
 The build is not available at the moment.
 <!--Windows build can be downloaded [here](https://github.com/NemGam/Snake/releases/download/v1.2.0/Pong.zip). Just unpack to any folder and run snake.exe. -->
