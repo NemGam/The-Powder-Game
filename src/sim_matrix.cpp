@@ -43,6 +43,7 @@ namespace powder_sim
 				delete matrix_[i][j];
 			}
 		}
+		std::cout << "Matrix has been destroyed\n";
 	}
 
 	void SimMatrix::Swap(int x1, int y1, int x2, int y2) {
@@ -102,7 +103,7 @@ namespace powder_sim
 	}
 
 	void SimMatrix::FlipUpdateFlag() {
-		std::cout << "Actually updated: " << Particle::DEBUG_UPDATED << '\n';
+		//std::cout << "Actually updated: " << Particle::DEBUG_UPDATED << '\n';
 		Particle::DEBUG_UPDATED = 0;
 		update_flag_ = !update_flag_;
 	}

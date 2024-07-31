@@ -3,12 +3,13 @@ project(ThePowderSim)
 
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/dist)
 
+add_executable(
+    ${PROJECT_NAME}
+)
+
 include_directories("${CMAKE_SOURCE_DIR}/include")
 include_directories("${CMAKE_SOURCE_DIR}/src")
-add_subdirectory(src)
-
-
-target_compile_options(${PROJECT_NAME} PRIVATE)
+add_subdirectory("${CMAKE_SOURCE_DIR}/src")
 
 target_link_libraries(
     ${PROJECT_NAME}

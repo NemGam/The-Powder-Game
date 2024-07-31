@@ -1,7 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
-
-add_executable(
-    ${PROJECT_NAME}
+target_sources(${PROJECT_NAME} PRIVATE
     mesh.cpp
     shader.cpp
     texture.cpp

@@ -1,4 +1,6 @@
 #include <array>
+#include <cstring>
+
 #include "particle.h"
 
 namespace powder_sim
@@ -24,7 +26,6 @@ namespace powder_sim
 			Move(matrix, x, y);
 			update_flag_ = !update_flag_;
 		}
-
 	}
 
 	void Particle::WakeUp() {
