@@ -40,6 +40,9 @@ namespace powder_sim
 		//Update color data
 		void ChangeColorAt(int x, int y, std::array<GLubyte, 4> color);
 		void SwapColorData(int x1, int y1, int x2, int y2);
+
+		//Accounts for the border before setting the particle
+		void SetParticleInternal(Particle* part, int x, int y);
 		[[nodiscard]] int GetColorIndexFromCoordinates(int x, int y) const;
 		[[nodiscard]] bool IsInBounds(int x, int y) const;
 
@@ -48,8 +51,7 @@ namespace powder_sim
 		bool update_flag_;
 		int width_;
 		int height_;
-		std::unique_ptr<Particle> border_particle_;
-		std::vector<std::vector<Particle*>> matrix_;
+		std::vector<Particle*> matrix_;
 		std::vector<GLubyte> color_data_;
 	};
 }

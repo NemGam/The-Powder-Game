@@ -17,8 +17,8 @@
 constexpr int kWindowHeight = 820;
 constexpr int kWindowWidth = 1280;
 
-constexpr int kGridWidth = 400;
-constexpr int kGridHeight = 400;
+constexpr int kGridWidth = 1000;
+constexpr int kGridHeight = 1000;
 
 using namespace powder_sim;
 
@@ -66,6 +66,7 @@ int main() {
 		float last_render_frame = 0.0f;
 
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+		glEnable(GL_CULL_FACE);
 
 		//Actual loop
 		while (Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
@@ -81,7 +82,7 @@ int main() {
 			{
 				glClear(GL_COLOR_BUFFER_BIT);
 				screen_quad.Render(main_shader);
-
+				
 				glfwSwapBuffers(&window->GetNativeWindow());
 
 
