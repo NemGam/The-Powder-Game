@@ -11,6 +11,8 @@ include_directories("${CMAKE_SOURCE_DIR}/include")
 include_directories("${CMAKE_SOURCE_DIR}/src")
 add_subdirectory("${CMAKE_SOURCE_DIR}/src")
 
+target_compile_options(${PROJECT_NAME} PRIVATE -O3)
+
 target_link_libraries(
     ${PROJECT_NAME}
     glfw
