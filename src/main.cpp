@@ -50,8 +50,8 @@ int main() {
 			},
 			//Indices
 			{ 
-			  2, 1, 0,
-			  0, 3, 2
+				2, 1, 0,
+				0, 3, 2
 			},
 			//Texture
 			main_tex
@@ -67,7 +67,8 @@ int main() {
 
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glEnable(GL_CULL_FACE);
-
+		float time = 0;
+		int num = 0;
 		//Actual loop
 		while (Application::IsRunning() && !glfwWindowShouldClose(&window->GetNativeWindow())) {
 			float current_frame = static_cast<float>(glfwGetTime());
@@ -75,8 +76,13 @@ int main() {
 			last_frame = current_frame;
 
 			window->Update();
+
+			//SLOW!!!
 			simulation.Update(delta_time);
-			std::cout << static_cast<int>(1 / (current_frame - last_render_frame)) << '\r';
+			//------
+			time += current_frame - last_render_frame;
+			num++;
+			//std::cout << static_cast<int>(1 / (current_frame - last_render_frame)) << "\r\n";
 			glfwPollEvents();
 			//if (current_frame - last_render_frame >= 1/60.0f)
 			{
@@ -90,7 +96,7 @@ int main() {
 			}
 		}
 
-
+		std::cout << "Average fps is " << 1 / (time / num) << "\n";
 		//Clean up
 		glDeleteProgram(main_shader.GetId());
 	}

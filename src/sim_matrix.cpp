@@ -35,7 +35,7 @@ namespace powder_sim
 					continue;
 				}
 
-				Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir, false);
+				Particle* part = ParticleCreator::GetParticleByMaterial(Material::kAir, true);
 				SetParticleInternal(part, x - 1, y - 1);
 				ChangeColorAt(x - 1, y - 1, part->GetColor());
 			}
@@ -85,8 +85,6 @@ namespace powder_sim
 	}
 
 	void SimMatrix::SetParticle(Material material, int x, int y) {
-		//Don't forget about the border!
-
 		Particle* particle = ParticleCreator::GetParticleByMaterial(material);
 		SetParticleInternal(particle, x, y);
 		ChangeColorAt(x, y, particle->GetColor());

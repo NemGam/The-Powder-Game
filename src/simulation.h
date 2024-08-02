@@ -11,12 +11,15 @@ namespace powder_sim
 	public:
 		Simulation(const Window* window, int width, int height);
 
+
 		void Start();
 		void Update(float dt);
-
 		SimMatrix& GetMatrix();
+		
 
 	private:
+		void UpdatePart(int x, int y, int width, int height);
+
 
 		SimMatrix matrix_;
 		Brush brush_;

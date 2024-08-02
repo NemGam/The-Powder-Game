@@ -15,10 +15,10 @@ namespace powder_sim
 	public:
 		//Creates matrix. Make sure that the max area is < 100000000.
 		SimMatrix(int width, int height);
-		SimMatrix(SimMatrix&) = delete;
-		SimMatrix(SimMatrix&&) = delete;
-		SimMatrix& operator=(const SimMatrix&) = delete;
-		SimMatrix&& operator=(SimMatrix&&) = delete;
+		SimMatrix(SimMatrix&) = default;
+		SimMatrix(SimMatrix&&) = default;
+		SimMatrix& operator=(const SimMatrix&) = default;
+		SimMatrix& operator=(SimMatrix&&) = default;
 
 
 		~SimMatrix();

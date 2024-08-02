@@ -40,10 +40,10 @@ namespace powder_sim
 
 		for (int i = minI; i <= maxI; i++) {
 			for (int j = minJ; j <= maxJ; j++) {
+				//if (matrix_->GetMaterial(i, j) == current_material_) continue;
 				if (force_replace || matrix_->GetMaterial(i, j) == Material::kAir) {
 					matrix_->SetParticle(material, i, j);
 				}
-				//if (random::Random() <= chance)
 			}
 		}
 	}
