@@ -3,4 +3,5 @@ target_sources(${PROJECT_NAME} PRIVATE
     input_manager.cpp
     random.cpp
     utils.cpp
+    chunk.cpp
 )

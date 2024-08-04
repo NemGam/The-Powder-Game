@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "particles/particle.h"
 #include "particles.h"
 #include "core/random.h"
 #include "particles/solid/immovable/border_rock.h"
@@ -22,7 +23,7 @@ namespace powder_sim
 	ParticleCreator::ParticleCreator() {
 		particles_ = {
 			{Material::kAir, new Air()},
-			{Material::kBorderRock, new BorderRock()},
+			{Material::kBorder, new BorderRock()},
 			{Material::kSand, new Sand()},
 			{Material::kStone, new Stone()},
 			{Material::kWater, new Water()},

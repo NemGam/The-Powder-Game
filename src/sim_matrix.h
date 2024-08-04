@@ -10,11 +10,12 @@
 namespace powder_sim
 {
 	class Particle;
+	class Chunk;
 
 	class SimMatrix {
 	public:
-		//Creates matrix. Make sure that the max area is < 100000000.
-		SimMatrix(int width, int height);
+		//Creates matrix. Make sure that the max area is < 100,000,000.
+		SimMatrix(int width, int height, int chunk_size);
 		SimMatrix(SimMatrix&) = default;
 		SimMatrix(SimMatrix&&) = default;
 		SimMatrix& operator=(const SimMatrix&) = default;
@@ -25,16 +26,22 @@ namespace powder_sim
 
 
 		void Swap(int x1, int y1, int x2, int y2);
-		void Update(int x, int y);
-		void WakeUpNeighbours(int x, int y) const;
+		void UpdateParticle(int x, int y);
+		void UpdateChunk(int x, int y);
+		void IncrementUpdateNumber();
 		void SetParticle(Material material, int x, int y);
+		void WakeUpNeighbours(int x, int y);
+		//Wakes up chunk at particle's position
+		void WakeUpChunk(int particle_x, int particle_y);
+
+		//Getters
+
 		[[nodiscard]] Particle* GetParticle(int x, int y) const;
 		//Returns material of a particle at a given point
 		[[nodiscard]] Material GetMaterial(int x, int y) const;
 		[[nodiscard]] const std::vector<GLubyte>* GetColorData() const;
 		[[nodiscard]] int GetWidth() const;
 		[[nodiscard]] int GetHeight() const;
-		void FlipUpdateFlag();
 
 	private:
 		//Update color data
@@ -46,12 +53,17 @@ namespace powder_sim
 		[[nodiscard]] int GetColorIndexFromCoordinates(int x, int y) const;
 		[[nodiscard]] bool IsInBounds(int x, int y) const;
 
-		//Flag that defines the "updated" flag.
-		//Allows to avoid resetting every particle's update flag at the end of the frame.
-		bool update_flag_;
-		int width_;
-		int height_;
+		void WakeUpChunkAt(int chunk_x, int chunk_y);
+
+		//Current update number
+		int update_number_;
+		int width_, height_;
+		int chunk_size_;
+		int x_chunks_num;
+		int y_chunks_num;
+		Particle* border_particle_;
 		std::vector<Particle*> matrix_;
+		std::vector<Chunk> chunks_;
 		std::vector<GLubyte> color_data_;
 	};
 }

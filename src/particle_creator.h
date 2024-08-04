@@ -4,10 +4,12 @@
 #include <unordered_map>
 
 #include "particles/material.h"
-#include "particles/particle.h"
+
 
 namespace powder_sim
 {
+	class Particle;
+
 	class ParticleCreator
 	{
 	public:

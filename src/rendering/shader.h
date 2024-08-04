@@ -2,8 +2,6 @@
 #define SHADER_H
 #include <string>
 
-#include "shader_source.h"
-
 namespace powder_sim
 {
 	class Shader
@@ -12,9 +10,15 @@ namespace powder_sim
 		explicit Shader(const std::string& filepath);
 
 
-		unsigned int GetId() const;
+		[[nodiscard]] unsigned int GetId() const;
 
 	private:
+		struct ShaderSource {
+			std::string vertex;
+			std::string fragment;
+		};
+
+
 		unsigned int id_;
 		static unsigned int CreateShader(const std::string& vertex_shader, const std::string& fragment_shader);
 		static unsigned int CompileShader(unsigned int type, const std::string& source);

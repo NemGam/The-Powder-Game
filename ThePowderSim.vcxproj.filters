@@ -32,10 +32,10 @@
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\particles\solid\immovable\stone.h" />
     <ClInclude Include="src\rendering\shader.h" />
-    <ClInclude Include="src\rendering\shader_source.h" />
     <ClInclude Include="src\rendering\mesh.h" />
     <ClInclude Include="src\rendering\vertex.h" />
     <ClInclude Include="src\rendering\texture.h" />
+    <ClInclude Include="src\core\chunk.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\input_manager.cpp" />
@@ -64,6 +64,7 @@
     <ClCompile Include="src\rendering\mesh.cpp" />
     <ClCompile Include="src\rendering\texture.cpp" />
     <ClCompile Include="src\rendering\vertex.cpp" />
+    <ClCompile Include="src\core\chunk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />

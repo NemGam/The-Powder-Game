@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\core\chunk.h" />
     <ClInclude Include="src\rendering\mesh.h" />
     <ClInclude Include="src\rendering\texture.h" />
     <ClInclude Include="src\rendering\vertex.h" />
@@ -39,7 +40,6 @@
     <ClInclude Include="src\particles\solid\movable\movable_solid_particle.h" />
     <ClInclude Include="src\particles\solid\solid_particle.h" />
     <ClInclude Include="src\particles\particle.h" />
-    <ClInclude Include="src\rendering\shader_source.h" />
     <ClInclude Include="src\simulation.h" />
     <ClInclude Include="src\core\application.h" />
     <ClInclude Include="src\core\input_manager.h" />
@@ -50,6 +50,7 @@
     <ClInclude Include="src\particles\liquid\water.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\chunk.cpp" />
     <ClCompile Include="src\rendering\mesh.cpp" />
     <ClCompile Include="src\rendering\texture.cpp" />
     <ClCompile Include="src\rendering\vertex.cpp" />

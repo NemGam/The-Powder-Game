@@ -7,4 +7,5 @@ namespace powder_sim::utils {
 
 		return { static_cast<int>(x * x_ratio), static_cast<int>((window->GetHeight() - y) * y_ratio) };
 	}
+
 }

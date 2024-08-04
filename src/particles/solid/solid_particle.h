@@ -8,9 +8,6 @@ namespace powder_sim
 	class SolidParticle :
 		public Particle
 	{
-	public:
-		void Move(SimMatrix& matrix, int x, int y) override;
-
 	protected:
 		SolidParticle(Material element, const std::array<GLubyte, 4>& color);
 	};

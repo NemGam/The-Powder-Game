@@ -8,6 +8,7 @@
 
 namespace powder_sim
 {
+
 	unsigned int Shader::CompileShader(unsigned int type, const std::string& source) {
 		unsigned int id = glCreateShader(type);
 		const char* src = source.c_str();
@@ -20,7 +21,7 @@ namespace powder_sim
 		if (!result) {
 			int len;
 			glGetShaderiv(id, GL_INFO_LOG_LENGTH, &len);
-			char* message = static_cast<char*>(alloca(len * sizeof(char)));
+			auto message = static_cast<char*>(alloca(len * sizeof(char)));
 			glGetShaderInfoLog(id, len, &len, message);
 			std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader!" << "\n";
 			std::cout << message << "\n";
@@ -48,7 +49,7 @@ namespace powder_sim
 	}
 
 
-	ShaderSource Shader::ParseShader(const std::string& filepath) {
+	Shader::ShaderSource Shader::ParseShader(const std::string& filepath) {
 		enum class ShaderType {
 			kNone = -1, kVertex = 0, kFragment = 1
 		};

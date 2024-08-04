@@ -13,12 +13,9 @@
 #include "core/input_manager.h"
 
 #include "simulation.h"
+#include "globals.h"
 
-constexpr int kWindowHeight = 820;
-constexpr int kWindowWidth = 1280;
 
-constexpr int kGridWidth = 1000;
-constexpr int kGridHeight = 1000;
 
 using namespace powder_sim;
 

@@ -5,11 +5,14 @@
 #include <thread>
 
 #include "particles/particle.h"
+#include "globals.h"
 
 namespace powder_sim
 {
+	
+
 	Simulation::Simulation(const Window* window, int width, int height) :
-		matrix_(width, height),
+		matrix_(width, height, kChunkSize),
 
 		brush_(window, &matrix_),
 		width_(width),
@@ -21,20 +24,11 @@ namespace powder_sim
 	}
 
 	void Simulation::UpdatePart(int x, int y, int width, int height) {
-		bool dir = false;
+		//std::cout << x << " " << y << std::endl;
 		for (int i = height - 1; i >= y; --i) {
-			if (dir) {
-				for (int j = x; j < width; ++j) {
-					matrix_.Update(j, i);
-				}
+			for (int j = width - 1; j >= x; --j) {
+				matrix_.UpdateChunk(j, i);
 			}
-			else {
-				for (int j = width - 1; j >= x; --j) {
-					matrix_.Update(j, i);
-				}
-			}
-
-			dir = !dir;
 		}
 	}
 
@@ -42,28 +36,37 @@ namespace powder_sim
 	void Simulation::Update(float dt) {
 		brush_.Update();
 
-		constexpr int threads_num = 3;
 
-		//NEW METHOD
+		//Separating threads to avoid any race conditions.
+		//Each thread will process one quadrant of the matrix.
 
-		//Odd threads
-		std::thread t1([&] { UpdatePart(0, 0, 
-			static_cast<int>(static_cast<float>(width_) / threads_num), height_); });
+		const int x_chunks_num = width_ / kChunkSize;
+		const int y_chunks_num = width_ / kChunkSize;
 
-		std::thread t3([&] { UpdatePart(static_cast<int>(width_ *  2.0f / threads_num), 0, 
-			static_cast<int>(width_ * 3.0f / threads_num), height_); });
-		
+		//Bottom-left
+		std::thread t1([&] { UpdatePart(0, 0, x_chunks_num / 2, y_chunks_num / 2); }); 
+
+		//Bottom-right
+		std::thread t2([&] { UpdatePart(x_chunks_num / 2, 0, x_chunks_num, y_chunks_num / 2); }); 
+
+		//Top-left
+		std::thread t3([&] { UpdatePart(0, y_chunks_num / 2, x_chunks_num / 2, y_chunks_num); }); 
+
+		//Top-right
+		std::thread t4([&] { UpdatePart(x_chunks_num / 2, y_chunks_num / 2, x_chunks_num, y_chunks_num); }); 
 		
 		t1.join();
-		t3.join();
-		
-		//Even threads
-		std::thread t2([&] { UpdatePart(static_cast<int>(static_cast<float>(width_) / threads_num), 0, 
-			static_cast<int>(width_ * 2.0f / threads_num), height_); });
-		
 		t2.join();
+		t3.join();
+		t4.join();
 
-		matrix_.FlipUpdateFlag();
+		// for (int y = height_ / kChunkSize - 1; y > -1 ; --y) {
+		// 	for (int x = width_ / kChunkSize - 1; x > -1; --x) {
+		// 		matrix_.UpdateChunk(x, y);
+		// 	}
+		// }
+
+		matrix_.IncrementUpdateNumber();
 	}
 
 	SimMatrix& Simulation::GetMatrix() {

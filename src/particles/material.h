@@ -1,5 +1,5 @@
-#ifndef Material_H
-#define Material_H
+#ifndef MATERIAL_H
+#define MATERIAL_H
 
 namespace powder_sim
 {
@@ -8,7 +8,7 @@ namespace powder_sim
 		kSand = 1,
 		kStone = 2,
 		kWater = 3,
-		kBorderRock = 4
+		kBorder = 4
 	};
 }
-#endif // Material_H
+#endif // MATERIAL_H

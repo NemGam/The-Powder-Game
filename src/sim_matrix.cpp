@@ -1,20 +1,22 @@
 #include <algorithm>
 #include <iostream>
 #include <glad/glad.h>
+#include <climits>
 
 #include "sim_matrix.h"
+#include "core/chunk.h"
 #include "particle_creator.h"
-#include "particles/solid/immovable/border_rock.h"
 
 namespace powder_sim
 {
-	SimMatrix::SimMatrix(int width, int height) :
-		update_flag_(true),
+	SimMatrix::SimMatrix(int width, int height, int chunk_size) :
+		update_number_(0),
 		width_(width),
 		height_(height),
+		chunk_size_(chunk_size),
 		matrix_((height + 2) * (width + 2))
 	{
-		Particle::DEBUG_UPDATED = 0;
+		Particle::DEBUG_UPDATED_THIS_FRAME = 0;
 		if (width * height > 5000000) {
 			std::cerr << "Matrix area must be < 5,000,000" << '\n';
 		}
@@ -23,7 +25,7 @@ namespace powder_sim
 		std::cout << (width * height) << '\n';
 
 		//No need to create copies of this particle
-		Particle* border_rock = ParticleCreator::GetParticleByMaterial(Material::kBorderRock, false);
+		border_particle_ = ParticleCreator::GetParticleByMaterial(Material::kBorder, false);
 
 		for (int y = 0; y < height + 2; ++y) {
 			for (int x = 0; x < width + 2; ++x) {
@@ -31,7 +33,7 @@ namespace powder_sim
 				//Creating a border
 				if (y == 0 || x == 0 || x == width + 1 || y == height + 1) {
 					//SetParticleInternal adjusts position, which is not desirable in case of the borders.
-					SetParticleInternal(border_rock, x - 1, y - 1);
+					SetParticleInternal(border_particle_, x - 1, y - 1);
 					continue;
 				}
 
@@ -41,26 +43,25 @@ namespace powder_sim
 			}
 		}
 
+		//Create chunks
+		x_chunks_num = width / chunk_size;
+		y_chunks_num = height / chunk_size;
+
+		for (int y = 0; y < y_chunks_num; ++y) {
+			for (int x = 0; x < x_chunks_num; ++x) {
+				chunks_.emplace_back(x, y, chunk_size, this);
+			}
+		}
 	}
 
 	SimMatrix::~SimMatrix() {
-		bool border_deleted = false;
-		for (int y = 0; y < height_ + 2; ++y) {
-			for (int x = 0; x < width_ + 2; ++x) {
-
-				//Deleting border (only once)
-				if (y == 0 || x == 0 || x == width_ + 1 || y == height_ + 1) {
-					if (border_deleted) continue;
-
-					border_deleted = true;
-					delete matrix_[y * (width_ + 2) + x];
-
-					continue;
-				}
+		for (int y = 1; y < height_ + 1; ++y) {
+			for (int x = 1; x < width_ + 1; ++x) {
 
 				delete matrix_[y * (width_ + 2) + x];
 			}
 		}
+		delete border_particle_;
 		std::cout << "Matrix has been destroyed\n";
 	}
 
@@ -71,17 +72,23 @@ namespace powder_sim
 		SwapColorData(x1, y1, x2, y2);
 	}
 
-	void SimMatrix::Update(int x, int y) {
-		if (GetParticle(x, y)->GetUpdateFlag() == update_flag_) return;
-		GetParticle(x, y)->Update(*this, x, y);
+	void SimMatrix::UpdateParticle(int x, int y) {
+		GetParticle(x, y)->Update(*this, x, y, update_number_);
 	}
 
-	void SimMatrix::WakeUpNeighbours(int x, int y) const {
+	void SimMatrix::WakeUpNeighbours(int x, int y) {
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
 				GetParticle(i, j)->WakeUp();
+				WakeUpChunk(i, j);
 			}
 		}
+	}
+
+	void SimMatrix::WakeUpChunk(int particle_x, int particle_y) {
+		int chunk_x = particle_x / chunk_size_;
+		int chunk_y = particle_y / chunk_size_;
+		WakeUpChunkAt(chunk_x, chunk_y);
 	}
 
 	void SimMatrix::SetParticle(Material material, int x, int y) {
@@ -89,6 +96,7 @@ namespace powder_sim
 		SetParticleInternal(particle, x, y);
 		ChangeColorAt(x, y, particle->GetColor());
 		WakeUpNeighbours(x, y);
+		WakeUpChunk(x, y);
 	}
 
 
@@ -112,10 +120,17 @@ namespace powder_sim
 		return height_;
 	}
 
-	void SimMatrix::FlipUpdateFlag() {
+	void SimMatrix::UpdateChunk(int x, int y) {
+		chunks_[y * x_chunks_num + x].Update();
+	}
+
+	void SimMatrix::IncrementUpdateNumber() {
 		//std::cout << "Actually updated: " << Particle::DEBUG_UPDATED << '\n';
-		Particle::DEBUG_UPDATED = 0;
-		update_flag_ = !update_flag_;
+		Particle::DEBUG_UPDATED_THIS_FRAME = 0;
+
+		//This will introduce some artifacts if a particle was not updated for a really long time, ~68 years
+		update_number_ = (update_number_ + 1) % INT_MAX;
+		std::cout << "Update: " << update_number_ << '\n';
 	}
 
 	void SimMatrix::ChangeColorAt(int x, int y, std::array<GLubyte, 4> color) {
@@ -147,5 +162,10 @@ namespace powder_sim
 
 	bool SimMatrix::IsInBounds(int x, int y) const {
 		return (0 <= x && x < width_ && 0 <= y && y < height_);
+	}
+
+	void SimMatrix::WakeUpChunkAt(int chunk_x, int chunk_y) {
+		if (chunk_x < 0 || chunk_x >= x_chunks_num || chunk_y < 0 || chunk_y >= y_chunks_num) return;
+		chunks_[chunk_y * x_chunks_num + chunk_x].WakeUp();
 	}
 }
