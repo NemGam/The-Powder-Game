@@ -43,7 +43,7 @@ namespace powder_sim
 
 		[[nodiscard]] virtual Particle* Clone() const = 0;
 
-		//The last update call the particle was actually updated.
+		//The last frame this particle was actually updated.
 		int last_update_number_;
 		bool is_sleeping_;
 		Material element_;

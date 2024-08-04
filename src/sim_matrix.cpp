@@ -62,7 +62,6 @@ namespace powder_sim
 			}
 		}
 		delete border_particle_;
-		std::cout << "Matrix has been destroyed\n";
 	}
 
 	void SimMatrix::Swap(int x1, int y1, int x2, int y2) {
@@ -130,16 +129,12 @@ namespace powder_sim
 
 		//This will introduce some artifacts if a particle was not updated for a really long time, ~68 years
 		update_number_ = (update_number_ + 1) % INT_MAX;
-		std::cout << "Update: " << update_number_ << '\n';
+		//std::cout << "Update: " << update_number_ << '\n';
 	}
 
 	void SimMatrix::ChangeColorAt(int x, int y, std::array<GLubyte, 4> color) {
-		//std::memcpy(color_data_[y][x].data(), color.data(), color.size());
 		int ind = GetColorIndexFromCoordinates(x, y);
-		color_data_[ind] = color[0];
-		color_data_[ind + 1] = color[1];
-		color_data_[ind + 2] = color[2];
-		color_data_[ind + 3] = color[3];
+		std::memcpy(&color_data_[ind], color.data(), 4 * sizeof(GLubyte));
 	}
 
 	void SimMatrix::SwapColorData(int x1, int y1, int x2, int y2) {
