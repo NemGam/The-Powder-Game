@@ -1,5 +1,5 @@
 # <ins>The Powder Sim</ins>
-High performant falling sand simulation made with OpenGL and C++.
+High performant falling sand simulation (with 1,000,000 particles) made with OpenGL and C++.
 
 # Controls:
 	'1' - select Sand.
