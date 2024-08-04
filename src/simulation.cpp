@@ -1,16 +1,12 @@
 #include "simulation.h"
 
-#include <functional>
 #include <iostream>
 #include <thread>
 
-#include "particles/particle.h"
 #include "globals.h"
 
 namespace powder_sim
 {
-	
-
 	Simulation::Simulation(const Window* window, int width, int height) :
 		matrix_(width, height, kChunkSize),
 
@@ -20,11 +16,10 @@ namespace powder_sim
 	{}
 
 	void Simulation::Start() {
-
+		//Implement thread pooling? Should improve the performance
 	}
 
 	void Simulation::UpdatePart(int x, int y, int width, int height) {
-		//std::cout << x << " " << y << std::endl;
 		for (int i = height - 1; i >= y; --i) {
 			for (int j = width - 1; j >= x; --j) {
 				matrix_.UpdateChunk(j, i);
@@ -59,12 +54,6 @@ namespace powder_sim
 		t2.join();
 		t3.join();
 		t4.join();
-
-		// for (int y = height_ / kChunkSize - 1; y > -1 ; --y) {
-		// 	for (int x = width_ / kChunkSize - 1; x > -1; --x) {
-		// 		matrix_.UpdateChunk(x, y);
-		// 	}
-		// }
 
 		matrix_.IncrementUpdateNumber();
 	}
